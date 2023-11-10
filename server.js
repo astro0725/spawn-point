@@ -5,6 +5,8 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
+const admin = require("firebase-admin");
+const firebase = require("./config/firebase");
 
 const seuquelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -24,6 +26,7 @@ const sess = {
     db: seuquelize,
   }),
 };
+
 // use the session middleware
 app.use(session(sess));
 // use the Handlebars.js engine instance to render all templates
