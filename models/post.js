@@ -11,6 +11,16 @@ const Post = sequelize.define('Post', {
     allowNull: false
   },
 
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: true, 
+  },
+
+  videoUrl: {
+    type: Sequelize.STRING,
+    allowNull: true, 
+  },
+
   userId: {
     type: Sequelize.INTEGER,
     references: {
