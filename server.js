@@ -7,7 +7,6 @@ const routes = require("./controllers");
 const helpers = require("./utils/helpers");
 const admin = require("firebase-admin");
 const firebase = require("./config/firebase");
-const postsRouter = require('./routes/posts');
 
 const seuquelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -39,9 +38,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 // turn on routes
 app.use(routes);
-
-app.use(express.json());
-app.use('/api', postsRouter);
 
 function isAuthenticated(req, res, next) {
   if (req.session && req.session.userId) {
