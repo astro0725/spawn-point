@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS pixelp_db;
+CREATE DATABASE pixelp_db;
