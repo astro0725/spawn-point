@@ -34,7 +34,7 @@ const createPost = async (req, res) => {
 };
 
 module.exports = {
-    upload
+    upload,
     createPost,
 };
 
