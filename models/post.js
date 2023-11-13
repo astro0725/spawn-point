@@ -27,7 +27,11 @@ const Post = sequelize.define('Post', {
       model: 'Users', 
       key: 'id',
     }
-  }
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+  },
 
 });
 
