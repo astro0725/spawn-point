@@ -1,5 +1,19 @@
 const { Post } = require("../models");
+const multer = require('multer');
+const path = require('path');
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/'); // Set the destination for file uploads
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+    const upload = multer({ storage: storage });
+
+// defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
         const userId = req.session.userId || req.user.id; // conjecture -- placeholder until i see randy's file structure
@@ -20,5 +34,9 @@ const createPost = async (req, res) => {
 };
 
 module.exports = {
+    upload
     createPost,
 };
+
+// firebase configuration for parameters in authentication next testing
+// writing functions for follow unfollow feature testing tba
