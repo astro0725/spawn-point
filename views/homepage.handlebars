@@ -1,1 +1,29 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+
+</head>
+<body>
+    <h1>Feed</h1>
+    {{#each posts}}
+        <div class="post">
+            <h2>{{this.title}}</h2>
+            <p>{{this.body}}</p>
+            {{#if this.imageUrl}}
+                <img src="{{this.imageUrl}}" alt="Post Image">
+            {{/if}}
+            {{#if this.videoUrl}}
+                <video controls>
+                    <source src="{{this.videoUrl}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {{/if}}
+        </div>
+    {{else}}
+        <p>No posts to display.</p>
+    {{/each}}
+</body>
+</html>

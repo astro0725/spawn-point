@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../config/sequelize-config'); 
+const sequelize = require('../config/sequelize'); 
 
 const Post = sequelize.define('Post', {
   title: {
@@ -9,6 +9,16 @@ const Post = sequelize.define('Post', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: true, 
+  },
+
+  videoUrl: {
+    type: Sequelize.STRING,
+    allowNull: true, 
   },
 
   userId: {

@@ -38,5 +38,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 // turn on routes
 app.use(routes);
+
+
 // turn on connection to db and server
 app.listen(PORT, () => console.log(`Server started at http://localhost:PORT`));
+
+// function isAuthenticated(req, res, next) {
+//   if (req.session && req.session.userId) {
+//     return next();
+//   } else {
+//     return res.status(401).json({ error: 'You must be logged in to create a post.' });
+//   }
+// }
+
+// router.post('/posts', isAuthenticated, async (req, res) => {
+//   //tba
+// });
