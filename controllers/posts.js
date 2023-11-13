@@ -33,9 +33,29 @@ const createPost = async (req, res) => {
     }
 };
 
+const deletePost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const deletedPost = await Post.destroy({
+            where: {
+                id: postId,
+                userId: req.user.id
+            }
+        });
+        if (!deletedPost) {
+            return res.status(404).json({ message: 'No post found with this id!' });
+        }
+
+        res.status(200).json({ message: 'Post deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     upload,
     createPost,
+    deletePost,
 };
 
 // firebase configuration for parameters in authentication next testing

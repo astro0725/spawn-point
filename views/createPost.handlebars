@@ -3,5 +3,6 @@
     <textarea name="body" placeholder="Your post" required></textarea>
     <input type="text" name="imageUrl" placeholder="Image URL">
     <input type="text" name="videoUrl" placeholder="Video URL">
+    <p>Posted on: {{formatDate this.createdAt}}</p>
     <button type="submit">Create Post</button>
 </form>
