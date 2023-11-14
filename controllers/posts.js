@@ -12,7 +12,24 @@ const storage = multer.diskStorage({
     }
 });
 
-    const upload = multer({ storage: storage });
+const upload = multer({ 
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 1024 * 1024 * 5 // 5 MB limit for file size
+    }
+}).fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }], (error, req, res, next) => {
+    if (error) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+            req.multerError = 'File size is too large!';
+        } else {
+            req.multerError = error.message;
+        }
+        next();
+    } else {
+        next();
+    }
+});
 
 // defining post logic for creating a post
 const createPost = async (req, res) => {
