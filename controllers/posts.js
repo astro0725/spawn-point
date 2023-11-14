@@ -17,11 +17,10 @@ const storage = multer.diskStorage({
 // defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
-        const { title, body } = req.body;
+        const { body } = req.body;
         const imageUrl = req.files['image'] ? req.files['image'][0].path : null;
         const videoUrl = req.files['video'] ? req.files['video'][0].path : null;
         const newPost = await Post.create({
-            title,
             body,
             imageUrl,
             videoUrl,
@@ -57,6 +56,3 @@ module.exports = {
     createPost,
     deletePost,
 };
-
-// firebase configuration for parameters in authentication next testing
-// writing functions for follow unfollow feature testing tba
