@@ -65,3 +65,19 @@ const displayResults = function (results) {
     // Append the result list to the results container
     resultsContainer.appendChild(resultList);
     }
+
+    
+const getGameByName = function(gameToFind)
+{
+    // TESTING COMMENT
+    console.log(`getByName envoked`);
+
+    // create a query parameter based on input game
+    let qp = `games?search=${gameToFind}`;
+    rawgFetch(qp, RAWG_URL, RAWG_KEY)
+    .then(function(result)
+    {
+        displayResults(result);
+    });
+
+} // end getGameByName
