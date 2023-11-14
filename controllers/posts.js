@@ -12,6 +12,17 @@ const storage = multer.diskStorage({
     }
 });
 
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|gif|mp4/;
+    const isAccepted = allowedTypes.test(file.mimetype) || allowedTypes.test(path.extname(file.originalname).toLowerCase());
+
+    if (isAccepted) {
+        return cb(null, true);
+    } else {
+        cb(new Error('Unsupported file type!'), false);
+    }
+};
+
 const upload = multer({ 
     storage: storage,
     fileFilter: fileFilter,
