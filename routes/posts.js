@@ -3,7 +3,9 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const { upload, createPost, deletePost } = require('../controllers/posts');
 
-upload.fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }]),
+router.post(
+    '/create',
+    upload.fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }]),
     [
         body('body').trim().isLength({ min: 1 }).withMessage('Post body is required'),
         body('body').escape(),
@@ -17,6 +19,7 @@ upload.fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }]),
     },
     createPost
 );
+
 
 app.post('/upload', upload.array('media'), function (req, res, next) {
     const fileInfos = req.files.map(file => ({
