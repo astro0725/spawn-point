@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-      // ... your model attributes here ...
       body: {
           type: DataTypes.TEXT,
           allowNull: false
