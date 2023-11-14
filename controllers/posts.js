@@ -28,7 +28,11 @@ const createPost = async (req, res) => {
             });
         res.json(newPost);
     } catch (error) {
-        res.status(500).json({ message: 'Error creating post', error: error });
+        if (error.name === 'SequelizeValidationError') {
+            return res.status(400).json({ message: 'Validation error', error: error.message });
+        } else {
+            return res.status(500).json({ message: 'Error creating post', error: error.message });
+        }
     }
 };
 
@@ -38,7 +42,7 @@ const deletePost = async (req, res) => {
         const deletedPost = await Post.destroy({
             where: {
                 id: postId,
-                userId: req.user.id
+                firebaseUserId: firebaseUserId
             }
         });
         if (!deletedPost) {
@@ -47,7 +51,7 @@ const deletePost = async (req, res) => {
 
         res.status(200).json({ message: 'Post deleted successfully' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
 };
 
