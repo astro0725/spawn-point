@@ -1,6 +1,7 @@
 const { Post } = require("../models");
 const multer = require('multer');
 const path = require('path');
+const firebaseUserId = getFirebaseUserIdFromRequest(req);
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,7 +17,6 @@ const storage = multer.diskStorage({
 // defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
-        const userId = req.session.userId || req.user.id; // conjecture -- placeholder until i see randy's file structure
         const { title, body } = req.body;
         const imageUrl = req.files['image'] ? req.files['image'][0].path : null;
         const videoUrl = req.files['video'] ? req.files['video'][0].path : null;
@@ -25,7 +25,7 @@ const createPost = async (req, res) => {
             body,
             imageUrl,
             videoUrl,
-            userId: userId 
+            firebaseUserId: firebaseUserId
             });
         res.json(newPost);
     } catch (error) {
