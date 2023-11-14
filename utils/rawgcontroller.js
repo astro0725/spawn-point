@@ -37,17 +37,31 @@ const displayResults = function (results) {
     resultsContainer.textContent = "No results found.";
     return;
      }
-
+    
      // Create an unordered list to hold the results
      const resultList = document.createElement("ul");
     
- // Create an image element
- const imageElement = document.createElement("img");
- imageElement.src = result.background_image; // Use the API-provided image URL
- imageElement.alt = result.name; // Set alt text for accessibility
- imageElement.style.maxWidth = "100px"; // Set a maximum width for the image (adjust as needed)
-
-
-
-
+     results.results.forEach((result) => {
+     // Create a list item
+     const listItem = document.createElement("li");
+    
+     // Create an image element
+     const imageElement = document.createElement("img");
+    imageElement.src = result.background_image; // Use the API-provided image URL
+    imageElement.alt = result.name; // Set alt text for accessibility
+    imageElement.style.maxWidth = "100px"; // Set a maximum width for the image (adjust as needed)
+    
+     // Create a text element for the game name
+    const textElement = document.createTextNode(result.name);
+    
+    // Append the image and text elements to the list item
+     listItem.appendChild(imageElement);
+     listItem.appendChild(textElement);
+    
+    // Append the list item to the result list
+    resultList.appendChild(listItem);
+    });
+    
+    // Append the result list to the results container
+    resultsContainer.appendChild(resultList);
     }
