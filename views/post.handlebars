@@ -1,0 +1,36 @@
+<div class="max-w-xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg my-5">
+    <div class="flex justify-between items-center bg-gray-100 p-4">
+        <div class="flex items-center">
+        <img src="{{profileImageUrl}}" alt="Profile image" class="rounded-full h-12 w-12 object-cover" onclick="window.location='{{profileLink}}';">
+        <span class="ml-2 font-semibold">{{username}}</span>
+        </div>
+        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center">
+        Follow
+        </button>
+    </div>
+
+    <div class="p-4">
+        <div class="text-gray-700 text-lg">{{postText}}</div>
+        {{#if hasMedia}}
+            <div class="mt-4">
+            <!-- Carousel container -->
+            <div id="carousel{{postId}}" class="relative">
+                <!-- Carousel slides -->
+                <div class="overflow-hidden whitespace-nowrap">
+                {{#each mediaUrls}}
+                <img src="{{this}}" class="inline-block w-full h-auto" alt="Media image">
+                {{/each}}
+                </div>
+                <!-- Carousel controls -->
+                <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white text-gray-800 hover:text-gray-600">
+                &#8592;</button>
+                <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white text-gray-800 hover:text-gray-600">
+                &#8594;</button>
+            </div>
+            </div>
+        {{/if}}
+
+    <div class="bg-gray-100 p-4 text-sm text-gray-600 text-right">
+        created on {{creationDate}}
+    </div>
+</div>
