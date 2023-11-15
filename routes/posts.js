@@ -1,5 +1,6 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
+const { Post } = require('../models');
 const router = express.Router();
 const { upload, createPost, deletePost } = require('../controllers/posts');
 
@@ -36,6 +37,26 @@ app.post('/upload', upload.array('media'), function (req, res, next) {
 });
 
 // route to delete a post by ID
-router.delete('/delete/:id', deletePost);
+router.delete('/delete/:postId', deletePost);
+
+// route to get post data and render in separate link
+router.get('/:username/:postId', async (req, res) => {
+    const { username, postId } = req.params;
+    try {
+        const post = await Post.findOne({
+            where: { id: postId },
+        });
+
+        if (!post) {
+            return res.status(404).send('Post not found');
+        }
+        res.render('postPage', { post });
+    } catch (error) {
+        // handle possible errors
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
 
 module.exports = router;

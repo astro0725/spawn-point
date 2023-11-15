@@ -15,7 +15,7 @@ async function submitPost(event) {
         content: postText
         };
 
-        // Send a POST request to create the new post
+// Send a POST request to create the new post
 fetch('/create', {
         method: 'POST',
         headers: {
