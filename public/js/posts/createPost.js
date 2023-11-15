@@ -16,7 +16,7 @@ async function submitPost(event) {
         };
 
         // Send a POST request to create the new post
-        fetch('/api/posts', {
+        fetch('/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
