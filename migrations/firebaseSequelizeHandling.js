@@ -1,3 +1,4 @@
+// TODO: See relevant firebase files for proper handling
 module.exports = {
     // define changes to be applied when migrating the database forward
     up: async (queryInterface, Sequelize) => {
