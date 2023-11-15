@@ -42,24 +42,6 @@ router.delete('/delete/:postId', deletePost);
 // route to get post data and render in separate link
 router.get('/:username/:postId', async (req, res) => {
     const { username, postId } = req.params;
-    try {
-        const post = await Post.findOne({
-            where: { id: postId },
-        });
-
-        if (!post) {
-            return res.status(404).send('Post not found');
-        }
-        res.render('postPage', { post });
-    } catch (error) {
-        // handle possible errors
-        console.error(error);
-        res.status(500).send('Server error');
-    }
-});
-
-router.get('/:username/:postId', async (req, res) => {
-    const { username, postId } = req.params;
 
     try {
         const post = await Post.findOne({
