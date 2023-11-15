@@ -1,6 +1,8 @@
 const path = require("path");
 
 module.exports = {
+  mode: "development",
+  devtool: "eval-source-map",
   // The entry point file described above
   entry: "./src/index.js",
   // The location of the build folder described above
@@ -8,7 +10,16 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  // Optional and for development only. This provides the ability to
-  // map the built code back to the original source format when debugging.
-  devtool: "eval-source-map",
+  watch: true,
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  optimization: {
+    minimize: true,
+  },
 };
