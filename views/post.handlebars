@@ -6,6 +6,12 @@
         <!-- User's username displayed next to the profile image -->
         <span class="ml-2 font-semibold">{{username}}</span>
         </div>
+        <!-- delete post button -->
+        {{#if isOwner}}
+            <div class="post-delete-button">
+                <button onclick="deletePost('{{post.id}}')">Delete Post</button>
+            </>
+        {{/if}}
         <!-- Button to follow the user -->
         <!-- TODO: Add link to follow the user -->
         <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center">
@@ -42,5 +48,6 @@
     </div>
 </div>
 
-<!-- Include the JavaScript file for handling the carousel -->
+<!-- Include the JavaScript file for special functions -->
 <script src="../public/js/posts/carousel.js"></script>
+<script src="../public/js/posts/deletePost.js"></script>
