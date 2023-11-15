@@ -1,7 +1,7 @@
 const { Post } = require("../models");
 const multer = require('multer');
 const path = require('path');
-// waiting for admin files from randy to ensure proper function usage
+// TODO: See firebase files for userid
 
 // multer configuration for handling file uploads
 const storage = multer.diskStorage({
@@ -72,19 +72,25 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
-        const deletedPost = await Post.destroy({
+        const firebaseUserId = req.user.id; // Assuming req.user is set by your authentication middleware
+
+        // First, find the post to check if it exists and belongs to the user
+        const post = await Post.findOne({
             where: {
                 id: postId,
                 firebaseUserId: firebaseUserId
             }
         });
-        if (!deletedPost) {
-            return res.status(404).json({ message: 'No post found with this id!' });
-        }
 
+        if (!post) {
+            // No post found
+            return res.status(404).json({ message: 'No post found with this id' });
+        }
+        // Post exists and belongs to the current user, proceed with deletion
+        await post.destroy();
         res.status(200).json({ message: 'Post deleted successfully' });
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 
