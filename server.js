@@ -3,10 +3,11 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
-const routes = require("./controllers");
+const routes = require("./controllers/api/index.js");
 const helpers = require("./utils/helpers");
 const admin = require("firebase-admin");
 const firebase = require("./config/firebase");
+const firebaseui = require("firebaseui");
 
 const seuquelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -38,7 +39,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 // turn on routes
 app.use(routes);
-
 
 // turn on connection to db and server
 app.listen(PORT, () => console.log(`Server started at http://localhost:PORT`));
