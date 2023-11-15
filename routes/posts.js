@@ -3,13 +3,17 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const { upload, createPost, deletePost } = require('../controllers/posts');
 
+// route to create a new post
 router.post(
     '/create',
+    // use the 'upload' middleware to handle file uploads (images and videos)
     upload.fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }]),
     [
+        // validate the 'body' field of the request body
         body('body').trim().isLength({ min: 1 }).withMessage('Post body is required'),
         body('body').escape(),
     ],
+    // middleware to check for validation errors
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -17,18 +21,21 @@ router.post(
         }
         next();
     },
+    // route handler to create a new post
     createPost
 );
 
-
+// route to upload files (images and videos)
 app.post('/upload', upload.array('media'), function (req, res, next) {
+    // map uploaded files to their URLs
     const fileInfos = req.files.map(file => ({
         url: '/uploads/' + file.filename,
     }));
 
-    res.json(fileInfos);
+    res.json(fileInfos); // respond with the file URLs
 });
 
+// route to delete a post by ID
 router.delete('/delete/:id', deletePost);
 
 module.exports = router;

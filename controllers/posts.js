@@ -1,8 +1,9 @@
 const { Post } = require("../models");
 const multer = require('multer');
 const path = require('path');
-const firebaseUserId = getFirebaseUserIdFromRequest(req);
+// waiting for admin files from randy to ensure proper function usage
 
+// multer configuration for handling file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads/'); // Set the destination for file uploads
@@ -12,17 +13,19 @@ const storage = multer.diskStorage({
     }
 });
 
+// define a function to filter file types that are allowed for upload
 const fileFilter = (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif|mp4/;
     const isAccepted = allowedTypes.test(file.mimetype) || allowedTypes.test(path.extname(file.originalname).toLowerCase());
 
     if (isAccepted) {
-        return cb(null, true);
+        return cb(null, true); // accept the file
     } else {
-        cb(new Error('Unsupported file type!'), false);
+        cb(new Error('Unsupported file type!'), false); // reject the file
     }
 };
 
+// configure multer with storage, file filter, and size limits
 const upload = multer({ 
     storage: storage,
     fileFilter: fileFilter,
@@ -45,6 +48,7 @@ const upload = multer({
 // defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
+        const firebaseUserId = await getFirebaseUserIdFromRequest(req);
         const { body } = req.body;
         const imageUrl = req.files['image'] ? req.files['image'][0].path : null;
         const videoUrl = req.files['video'] ? req.files['video'][0].path : null;
@@ -64,6 +68,7 @@ const createPost = async (req, res) => {
     }
 };
 
+// define a function for deleting a post
 const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;

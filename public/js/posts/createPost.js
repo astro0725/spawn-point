@@ -1,3 +1,4 @@
+// function to handle the submission of a new post
 async function submitPost(event) {
     event.preventDefault(); 
         const user = await getCurrentUser(); 
@@ -6,14 +7,15 @@ async function submitPost(event) {
         alert('You must be logged in to create a post.');
         return;
         }
-    
+
         const postText = document.getElementById('postText').value;
-        
+        // Create an object containing post data
         const postData = {
         userId: user.uid,
         content: postText
         };
 
+        // Send a POST request to create the new post
         fetch('/api/posts', {
         method: 'POST',
         headers: {
@@ -32,6 +34,8 @@ async function submitPost(event) {
         });
     }
 
+    // Function to get the current user's authentication status
+    // TODO: update for firebase user ID
     function getCurrentUser() {
         return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged((user) => {
@@ -45,4 +49,5 @@ async function submitPost(event) {
         });
         });
 }
+// add an event listener to the form submission
 document.getElementById('postForm').addEventListener('submit', submitPost);

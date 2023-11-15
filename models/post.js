@@ -1,4 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
+  // define a Sequelize model called 'Post'
   const Post = sequelize.define('Post', {
       body: {
           type: DataTypes.TEXT,
@@ -22,5 +23,5 @@ module.exports = (sequelize, DataTypes) => {
       },
   });
 
-  return Post;
+  return Post; // return the 'Post' model definition
 };
