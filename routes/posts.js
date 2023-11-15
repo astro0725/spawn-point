@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { Post } = require('../models');
-const firebaseAuth = require('../migrations/firebaseAuth');
+const firebaseAuth = require('../middlewares/firebaseAuth');
 const router = express.Router();
 const { upload, createPost, deletePost } = require('../controllers/posts');
 
