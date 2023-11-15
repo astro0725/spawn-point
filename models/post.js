@@ -1,34 +1,27 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../config/sequelize'); 
+module.exports = (sequelize, DataTypes) => {
+    // define a Sequelize model called 'Post'
+    const Post = sequelize.define('Post', {
+        body: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        imageUrl: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+        videoUrl: {
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
+        firebaseUserId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+        },
+    });
 
-const Post = sequelize.define('Post', {
-  title: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  body: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  },
-
-  imageUrl: {
-    type: Sequelize.STRING,
-    allowNull: true, 
-  },
-
-  videoUrl: {
-    type: Sequelize.STRING,
-    allowNull: true, 
-  },
-
-  userId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: 'Users', 
-      key: 'id',
-    }
-  }
-
-});
-
-module.exports = Post;
+    return Post; // return the 'Post' model definition
+};
