@@ -58,5 +58,28 @@ router.get('/:username/:postId', async (req, res) => {
     }
 });
 
+router.get('/:username/:postId', async (req, res) => {
+    const { username, postId } = req.params;
+
+    try {
+        const post = await Post.findOne({
+            where: { id: postId },
+            model: User, as: 'user',
+        });
+
+        if (!post) {
+            return res.status(404).send('Post not found');
+        }
+
+        const isOwner = post.username === username;
+        // commented code is to replace variable if necessary
+        // const isOwner = post.firebaseUserId === req.user.firebaseUserId;
+        res.render('postPage', { post, isOwner });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
 
 module.exports = router;
