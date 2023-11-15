@@ -27,7 +27,7 @@ router.post(
 );
 
 // route to upload files (images and videos)
-app.post('/upload', upload.array('media'), function (req, res, next) {
+router.post('/upload', upload.array('media'), function (req, res, next) {
     // map uploaded files to their URLs
     const fileInfos = req.files.map(file => ({
         url: '/uploads/' + file.filename,
