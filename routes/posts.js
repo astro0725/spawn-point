@@ -1,12 +1,14 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { Post } = require('../models');
+const firebaseAuth = require('../migrations/firebaseAuth');
 const router = express.Router();
 const { upload, createPost, deletePost } = require('../controllers/posts');
 
 // route to create a new post
 router.post(
     '/create',
+    firebaseAuth,
     // use the 'upload' middleware to handle file uploads (images and videos)
     upload.fields([{ name: 'image', maxCount: 3 }, { name: 'video', maxCount: 1 }]),
     [
@@ -37,7 +39,7 @@ router.post('/upload', upload.array('media'), function (req, res, next) {
 });
 
 // route to delete a post by ID
-router.delete('/delete/:postId', deletePost);
+router.delete('/delete/:postId', firebaseAuth, deletePost);
 
 // route to get post data and render in separate link
 router.get('/:username/:postId', async (req, res) => {
@@ -53,9 +55,7 @@ router.get('/:username/:postId', async (req, res) => {
             return res.status(404).send('Post not found');
         }
 
-        const isOwner = post.username === username;
-        // commented code is to replace variable if necessary
-        // const isOwner = post.firebaseUserId === req.user.firebaseUserId;
+        const isOwner = post.firebaseUserId === req.user.firebaseUserId;
         res.render('postPage', { post, isOwner });
     } catch (error) {
         console.error(error);

@@ -48,7 +48,7 @@ const upload = multer({
 // defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
-        const firebaseUserId = await getFirebaseUserIdFromRequest(req);
+        const firebaseUserId = req.firebaseUserId;
         const { body } = req.body;
         const imageUrl = req.files['image'] ? req.files['image'][0].path : null;
         const videoUrl = req.files['video'] ? req.files['video'][0].path : null;
