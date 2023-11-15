@@ -48,7 +48,7 @@ const upload = multer({
 // defining post logic for creating a post
 const createPost = async (req, res) => {
     try {
-        const firebaseUserId = await getFirebaseUserIdFromRequest(req);
+        const firebaseUserId = req.firebaseUserId;
         const { body } = req.body;
         const imageUrl = req.files['image'] ? req.files['image'][0].path : null;
         const videoUrl = req.files['video'] ? req.files['video'][0].path : null;
@@ -72,7 +72,7 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
-        const firebaseUserId = req.user.id; // Assuming req.user is set by your authentication middleware
+        const firebaseUserId = req.firebaseUserId 
 
         // First, find the post to check if it exists and belongs to the user
         const post = await Post.findOne({
