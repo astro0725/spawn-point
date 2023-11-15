@@ -72,7 +72,7 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
-        const firebaseUserId = req.user.id; // Assuming req.user is set by your authentication middleware
+        const firebaseUserId = req.firebaseUserId 
 
         // First, find the post to check if it exists and belongs to the user
         const post = await Post.findOne({
