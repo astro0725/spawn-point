@@ -1,5 +1,5 @@
-// require express router and the user routes
+// require the necessary modules
 const router = require("express").Router();
 
-// export router
+// export the router
 module.exports = router;
