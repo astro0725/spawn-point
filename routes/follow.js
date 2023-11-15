@@ -7,6 +7,7 @@ const { followUser, unfollowUser } = require("../controllers/follow");
 // put route to update a users following
 router.put("/addfollow", followUser);
 
+// delete route to update when user unfollows
 router.delete("/removefollow", unfollowUser);
 
 module.exports = router;
