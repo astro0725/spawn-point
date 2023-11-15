@@ -1,4 +1,4 @@
-const { Post } = require("../models");
+const { Post } = require("../../models");
 const multer = require('multer');
 const path = require('path');
 // TODO: See firebase files for userid
