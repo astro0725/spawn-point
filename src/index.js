@@ -1,3 +1,11 @@
+import mainLayout from 'views/layouts/main.handlebars';
+import headerPartial from 'views/partials/header.handlebars';
+import sidebarPartial from 'views/partials/sidebar.handlebars';
+import personalPostsPartial from 'views/partials/personalPosts.handlebars';
+import footerPartial from 'views/partials/footer.handlebars';
+import createPostLayout from 'views/partials/createPost.handlebars';
+import homepageLayout from 'views/partials/homepage.handlebars';
+import postLayout from 'views/partials/post.handlebars';
 import "./style.css";
 import {
   hideLoginError,
@@ -86,3 +94,8 @@ const auth = getAuth(firebaseApp);
 connectAuthEmulator(auth, "http://localhost:3001");
 
 monitorAuthState();
+
+Handlebars.registerPartial('header', headerPartial);
+Handlebars.registerPartial('footer', footerPartial);
+Handlebars.registerPartial('sidebar', sidebarPartial);
+Handlebars.registerPartial('personalPosts', personalPostsPartial);

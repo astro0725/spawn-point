@@ -8,6 +8,7 @@ const helpers = require("./utils/helpers");
 const admin = require("firebase-admin");
 const firebase = require("./config/firebase");
 const firebaseui = require("firebaseui");
+const views = require("./views");
 
 const seuquelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
