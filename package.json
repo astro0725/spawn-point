@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "webpack serve",
+    "start": "nodemon start",
     "build": "webpack --mode production"
   },
   "keywords": [

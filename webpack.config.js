@@ -5,10 +5,13 @@ module.exports = {
   devtool: "eval-source-map",
   // The entry point file described above
   entry: "./src/index.js",
-  // The location of the build folder described above
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+  devServer: {
+    proxy: {
+      '/routes': {
+        target: 'http://localhost:3001', 
+        secure: false
+      }
+    }
   },
   watch: true,
   module: {
@@ -18,6 +21,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+    },
+      {
         test: /\.handlebars$/,
         loader: "handlebars-loader",
       },
@@ -25,5 +32,10 @@ module.exports = {
   },
   optimization: {
     minimize: true,
+  },
+  // The location of the build folder described above
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 };

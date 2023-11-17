@@ -3,14 +3,14 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
-const routes = require("./controllers/api/index.js");
+const routes = require("./routes/index.js");
 const helpers = require("./utils/helpers");
 const admin = require("firebase-admin");
-const firebase = require("./config/firebase");
+const firebase = require("../config/firebase.js");
 const firebaseui = require("firebaseui");
 const views = require("./views");
 
-const seuquelize = require("./config/connection");
+const seuquelize = require("../config/connection.js");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // using express-session and connect-session-sequelize to create a session middleware
 const app = express();
@@ -37,21 +37,9 @@ app.set("view engine", "handlebars");
 // use the express.static() method to serve the files in the public directory
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public", "index.html")));
 // turn on routes
 app.use(routes);
 
 // turn on connection to db and server
 app.listen(PORT, () => console.log(`Server started at http://localhost:PORT`));
-
-// function isAuthenticated(req, res, next) {
-//   if (req.session && req.session.userId) {
-//     return next();
-//   } else {
-//     return res.status(401).json({ error: 'You must be logged in to create a post.' });
-//   }
-// }
-
-// router.post('/posts', isAuthenticated, async (req, res) => {
-//   //tba
-// });

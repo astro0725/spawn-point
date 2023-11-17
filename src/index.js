@@ -38,6 +38,9 @@ const firebaseApp = {
   appId: "1:308630756272:web:1f7f9e0703c0803b449475",
   measurementId: "G-X42F0TX02X",
 };
+initializeApp(firebaseApp);
+const auth = getAuth(firebaseApp);
+
 
 // Login using email/password
 const loginEmailPassword = async () => {
@@ -91,7 +94,6 @@ btnLogin.addEventListener("click", loginEmailPassword);
 btnSignup.addEventListener("click", createAccount);
 btnLogout.addEventListener("click", logout);
 
-const auth = getAuth(firebaseApp);
 connectAuthEmulator(auth, "http://localhost:3001");
 
 monitorAuthState();
@@ -103,8 +105,35 @@ Handlebars.registerPartial('post', postPartial);
 Handlebars.registerPartial('personalPosts', personalPostsPartial);
 
 // ! example of how to utilize hbs files for the application
-document.addEventListener('DOMContentLoaded', () => {
-    const template = Handlebars.compile(mainLayout);
-    const html = template({ /* TODO: place data object */ });
-    document.body.innerHTML = html;
+async function fetchPosts() {
+  try {
+      const response = await fetch('./routes/posts'); 
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return await response.json();
+  } catch (error) {
+      console.error('Unable to fetch posts:', error);
+  }
+}
+
+async function FRHomepage(user) {
+  const posts = await fetchPosts();
+  renderPage(user, posts);
+}
+
+function renderPage(user, posts) {
+  const template = Handlebars.compile(homepageLayout);
+  const html = template({ user: user, posts: posts });
+  document.body.innerHTML = html;
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+      const posts = await fetchPosts();
+      renderPage(user, posts);
+  } else {
+      // Handle unauthenticated state
+      // You might want to render a different page or show a login form
+  }
 });

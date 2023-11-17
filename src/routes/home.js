@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post');
+const { getHomeData } = require('../controllers/home'); 
 
 router.get('/', async (req, res) => {
-  try {
-    const posts = await Post.findAll();
-    res.render('homepage', { posts });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+    try {
+        const data = await getHomeData();
+        res.render('homepage', data); 
+    } catch (error) {
+        res.status(500).send('Error occurred');
+    }
 });
 
 module.exports = router;
