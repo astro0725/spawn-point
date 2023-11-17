@@ -1,11 +1,12 @@
-import mainLayout from 'views/layouts/main.handlebars';
-import headerPartial from 'views/partials/header.handlebars';
-import sidebarPartial from 'views/partials/sidebar.handlebars';
-import personalPostsPartial from 'views/partials/personalPosts.handlebars';
-import footerPartial from 'views/partials/footer.handlebars';
-import createPostLayout from 'views/partials/createPost.handlebars';
-import homepageLayout from 'views/partials/homepage.handlebars';
-import postLayout from 'views/partials/post.handlebars';
+import Handlebars from 'handlebars';
+import mainLayout from './views/layouts/main.handlebars';
+import headerPartial from './views/partials/header.handlebars';
+import sidebarPartial from './views/partials/sidebar.handlebars';
+import personalPostsPartial from './views/partials/personalPosts.handlebars';
+import postPartial from './views/partials/post.handlebars';
+import footerPartial from './views/partials/footer.handlebars';
+import createPostLayout from './views/createPost.handlebars';
+import homepageLayout from './views/homepage.handlebars';
 import "./style.css";
 import {
   hideLoginError,
@@ -98,6 +99,7 @@ monitorAuthState();
 Handlebars.registerPartial('header', headerPartial);
 Handlebars.registerPartial('footer', footerPartial);
 Handlebars.registerPartial('sidebar', sidebarPartial);
+Handlebars.registerPartial('post', postPartial);
 Handlebars.registerPartial('personalPosts', personalPostsPartial);
 
 // ! example of how to utilize hbs files for the application
