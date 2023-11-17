@@ -99,3 +99,10 @@ Handlebars.registerPartial('header', headerPartial);
 Handlebars.registerPartial('footer', footerPartial);
 Handlebars.registerPartial('sidebar', sidebarPartial);
 Handlebars.registerPartial('personalPosts', personalPostsPartial);
+
+// ! example of how to utilize hbs files for the application
+document.addEventListener('DOMContentLoaded', () => {
+    const template = Handlebars.compile(mainLayout);
+    const html = template({ /* TODO: place data object */ });
+    document.body.innerHTML = html;
+});
