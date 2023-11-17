@@ -1,13 +1,12 @@
-// require express router and the user routes
-const router = require("express").Router();
-// import user model / require user model
-const User = require("../models/user");
-const { followUser, unfollowUser } = require("../controllers/follow");
+const express = require("express");
+const router = express.Router();
+const firebaseAuth = require("../middlewares/firebaseAuth");
+const followController = require("../controllers/follow");
 
 // put route to update a users following
-router.put("/addfollow", followUser);
+router.put("/follow", followUser);
 
 // delete route to update when user unfollows
-router.delete("/removefollow", unfollowUser);
+router.delete("/unfollow", unfollowUser);
 
 module.exports = router;

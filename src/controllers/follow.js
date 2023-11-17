@@ -1,11 +1,12 @@
 const User = require("../models/user");
+const Follow = require("../models/follow");
+const firebaseAuth = require("../middlewares/firebaseAuth");
 
 // route to follow a user
 const followUser = async (req, res) => {
+  const followerId = req.firebaseUserId;
+  const followedId = req.params.firebaseUserId;
   try {
-    const followerId = req.user.id; // if we have authentication middleware
-    const followedUserId = req.params.userId;
-
     // checks if user is following
     const existingFollower = await Follower.findOne({
       where: {
@@ -35,10 +36,15 @@ const followUser = async (req, res) => {
 
 // route to unfollow a user
 const unfollowUser = async (req, res) => {
+  const followerId = req.firebaseUserId;
+  const followedId = req.params.firebaseUserId;
   try {
-    // logic for finding user, then remove corresponding user that we wanna unfollow
-    const { uuid } = req.params;
-    const userToUnfollow = await User.findOne({ where: { uuid } });
+    const follow = await Follow.findOne({
+      where: {
+        followerId: followerId,
+        followedUserId: followedId,
+      },
+    });
     // checks if user exists
     if (!userToUnfollow) {
       return res.status(404).json({ message: "User not found" });

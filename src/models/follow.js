@@ -8,10 +8,12 @@ Follow.init(
     followerId: {
       type: DataTypes.STRING,
       allowNull: false,
+      references: { model: "Users", key: "fierbaseUserId" },
     },
     followedId: {
       type: DataTypes.STRING,
       allowNull: false,
+      references: { model: "Users", key: "fierbaseUserId" },
     },
   },
   {
