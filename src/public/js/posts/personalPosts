@@ -1,0 +1,15 @@
+function loadPosts(userId) {
+    fetch(`/user/${userId}/posts`)
+        .then(response => response.json())
+        .then(posts => {
+            const postsHtml = Handlebars.compile(document.getElementById('posts-template').innerHTML)({ posts });
+            document.querySelector('.posts-container').innerHTML = postsHtml;
+        })
+        .catch(error => console.error('Error fetching posts:', error));
+}
+
+// call loadPosts with the appropriate user ID when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const userId = '...'; // retrieve the user ID from the page context or URL
+    loadPosts(userId);
+});
