@@ -3,11 +3,15 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
-const routes = require("./src/index.js");
+const routes = require("./controllers/api/index.js");
 const helpers = require("./utils/helpers");
+const csrf = require("csurf");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const admin = require("firebase-admin");
 const firebase = require("./config/firebase");
 const firebaseui = require("firebaseui");
+const csrfMiddleware = csrf({ cookie: true });
 
 const seuquelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -17,16 +21,6 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 // create a Handlebars.js engine instance with custom helper functions
 const hbs = exphbs.create({ helpers });
-// creates a session middleware with our certain configurations
-const sess = {
-  secret: "secret",
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: seuquelize,
-  }),
-};
 
 // use the session middleware
 app.use(session(sess));
