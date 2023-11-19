@@ -94,8 +94,22 @@ const deletePost = async (req, res) => {
     }
 };
 
+const getPostsByUser = async (req, res) => {
+    try {
+        const firebaseUserId = req.firebaseUserId;
+        const posts = await Post.findAll({ 
+            where: { firebaseUserId }, 
+            order: [['createdAt', 'DESC']]
+        });
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     upload,
     createPost,
     deletePost,
+    getPostsByUser,
 };
