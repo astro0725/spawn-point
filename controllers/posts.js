@@ -1,7 +1,6 @@
 const { Post } = require("../../models");
 const multer = require('multer');
 const path = require('path');
-// TODO: See firebase files for userid
 
 // multer configuration for handling file uploads
 const storage = multer.diskStorage({
