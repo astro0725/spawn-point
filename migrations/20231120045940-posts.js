@@ -24,8 +24,9 @@ module.exports = {
       },
       // Define a 'firebaseUserId' column to store the Firebase user ID
       firebaseUserId: {
-        type: DataTypes.STRING, // Assuming Firebase user IDs are strings
-        allowNull: false
+        type: DataTypes.STRING, 
+        allowNull: false,
+        unique: true
       },
       // Timestamps
       createdAt: {
