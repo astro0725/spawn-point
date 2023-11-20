@@ -1,50 +1,51 @@
-// require the necessary modules
-const path = require("path");
-const express = require("express");
-const session = require("express-session");
-const exphbs = require("express-handlebars");
-const routes = require("./controllers/api/index.js");
-const helpers = require("./utils/helpers");
+const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const admin = require("firebase-admin");
-const firebase = require("./config/firebase");
-const firebaseui = require("firebaseui");
+const express = require("express");
+
+// Create a CSRF middleware that will add a CSRF token to all requests
 const csrfMiddleware = csrf({ cookie: true });
 
-const seuquelize = require("./config/connection");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-// using express-session and connect-session-sequelize to create a session middleware
-const app = express();
-// sets up the Express.js session and connect it to our Sequelize database
+// Create an express application with port number from environment variable or default 3001
 const PORT = process.env.PORT || 3001;
-// create a Handlebars.js engine instance with custom helper functions
-const hbs = exphbs.create({ helpers });
+const app = express();
 
-// use the session middleware
-app.use(session(sess));
-// use the Handlebars.js engine instance to render all templates
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
-// use the express.static() method to serve the files in the public directory
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-// turn on routes
-app.use(routes);
+// use ejs as the view engine
+app.engine("html", require("ejs").renderFile);
+// serve the files out of ./public as our main files
+app.use(express.static("public"));
 
-// turn on connection to db and server
-app.listen(PORT, () => console.log(`Server started at http://localhost:PORT`));
+// use the body parser middleware to parse the body of incoming requests
+app.use(bodyParser.json());
+// use the cookie parser middleware to parse cookies
+app.use(cookieParser());
+// use the CSRF middleware to add CSRF tokens to requests
+app.use(csrfMiddleware);
 
-// function isAuthenticated(req, res, next) {
-//   if (req.session && req.session.userId) {
-//     return next();
-//   } else {
-//     return res.status(401).json({ error: 'You must be logged in to create a post.' });
-//   }
-// }
-
-// router.post('/posts', isAuthenticated, async (req, res) => {
-//   //tba
-// });
+// routing middleware that directs all requests to the appropriate route
+// middleware to generate cookie with XSRF token
+// next() is called to continue to the next middleware
+app.all("*", (req, res, next) => {
+  res.cookie("XSRF-TOKEN", req.csrfToken());
+  next();
+});
+// login route that renders the login page
+app.get("/login", (req, res) => {
+  res.render("login.html");
+});
+// signup route that renders the signup page
+app.get("/signup", (req, res) => {
+  res.render("signup.html");
+});
+// profile route that renders the profile page
+app.get("/profile", (req, res) => {
+  res.render("profile.html");
+});
+// index route that renders the index.html page
+app.get("/", (req, res) => {
+  res.render("index.html");
+});
+// start the server
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
