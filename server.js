@@ -2,6 +2,14 @@ const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const bodyParser = require("body-parser");
 const express = require("express");
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://pixel-pals-fdb7e-default-rtdb.firebaseio.com",
+});
 
 // Create a CSRF middleware that will add a CSRF token to all requests
 const csrfMiddleware = csrf({ cookie: true });
