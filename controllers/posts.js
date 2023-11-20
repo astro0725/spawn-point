@@ -1,7 +1,6 @@
 const { Post } = require("../../models");
 const multer = require('multer');
 const path = require('path');
-// TODO: See firebase files for userid
 
 // multer configuration for handling file uploads
 const storage = multer.diskStorage({
@@ -94,8 +93,22 @@ const deletePost = async (req, res) => {
     }
 };
 
+const getPostsByUser = async (req, res) => {
+    try {
+        const firebaseUserId = req.firebaseUserId;
+        const posts = await Post.findAll({ 
+            where: { firebaseUserId }, 
+            order: [['createdAt', 'DESC']]
+        });
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     upload,
     createPost,
     deletePost,
+    getPostsByUser,
 };
