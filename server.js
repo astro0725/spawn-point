@@ -3,6 +3,7 @@ const csrf = require("csurf");
 const bodyParser = require("body-parser");
 const express = require("express");
 const admin = require("firebase-admin");
+const ejs = require('ejs');
 
 const serviceAccount = require("./serviceAccountKey.json");
 
