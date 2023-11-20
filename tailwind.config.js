@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ['./views/partials/*.handlebars', './views/*.handlebars'],
   theme: {
     extend: {
       fontFamily: {
@@ -8,7 +8,6 @@ module.exports = {
       },
       colors: {
         "bg-dark": "#21262a",
-        "bg-light": "#ffffff",
         "light-blue": "#a5dbff",
         purple: "#7d1399",
         "neon-pink": "#eb7dff",

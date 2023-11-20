@@ -8,9 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js",
-    "build-tail": "tailwindcss build -i styles/tailwindcss.css -o public/css/styles.css",
-    "build-tail-windows": "set NODE_ENV=production && npm run build-tail"
+    "start": "nodemon server.js && npm run build-tail",
+    "build-tail": "npx tailwindcss build -i public/css/tailwind.css -o public/css/styles.css --watch flag"
   },
   "keywords": [
     "social",
@@ -38,13 +37,14 @@
     "firebaseui": "^6.1.0",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.3",
-    "postcss": "^8.4.31",
     "sequelize": "^6.35.1",
-    "serve": "^14.2.1",
-    "tailwindcss": "^3.3.5"
+    "serve": "^14.2.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5"
   }
 }
