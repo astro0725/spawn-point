@@ -21,16 +21,6 @@ module.exports = {
       unique: true
       },
     });
-
-        // add the 'firebaseUserId' column to the 'Posts' table
-    await queryInterface.addColumn(
-      'Post', // name of the Source model (table)
-      'firebaseUserId', // name of the key we're adding 
-      {
-        type: Sequelize.STRING,
-        allowNull: false
-      }
-    );
   },
 
   async down (queryInterface, Sequelize) {
@@ -40,7 +30,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.removeColumn('Post', 'firebaseUserId');
     await queryInterface.dropTable('users');
   }
 };
