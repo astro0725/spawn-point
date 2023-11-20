@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "social",
@@ -39,6 +39,7 @@
     "tailwindcss": "^3.3.5"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
   }
 }
