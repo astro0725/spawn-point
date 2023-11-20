@@ -21,3 +21,24 @@
     </button>
 </div>
 </header>
+
+<header class="flex flex-wrap justify-between items-center w-full bg-green px-8" id="header">
+    <div class="flex items-center">
+        <img src="{{logoImgPath}}" alt="Bookworm logo" width="125" height="100">
+        <h1 class="text-pink font-bold text-4xl">Book</h1>
+        <h1 class="text-white font-bold text-4xl">Worm</h1>
+    </div>
+    <div class="flex flex-nowrap">
+        {{#if userIsAuthenticated}}
+            <button class="self-center px-8 py-3 rounded">Logout</button>
+        {{else}}
+            <button class="self-center px-8 py-3 rounded">Sign in</button>
+            <button class="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Sign up</button>
+        {{/if}}
+    </div>
+    <button class="p-4 lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-gray-100">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+</header>
