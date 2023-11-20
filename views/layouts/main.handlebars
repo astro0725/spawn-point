@@ -7,23 +7,17 @@
   <title>PixelPals</title>
   <link rel="stylesheet" href="/public/css/login/style.css">
   <link rel="stylesheet" href="/public/css/login/mvp.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="output.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">PixelPals</a>
-      </h1>
-    </header>
-    <main class="container container-fluid mt-5">
+  <!-- Render the header partial -->
+  {{> header }}
       <!-- Render the sub layout -->
       {{{ body }}}
-    </main>
     <footer>
     </footer>
-  </div>
 </body>
 
 </html>

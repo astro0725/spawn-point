@@ -3,6 +3,9 @@ module.exports = {
   content: [],
   theme: {
     extend: {
+      fontFamily: {
+        'press-start':['"Press Start 2P"']
+      },
       colors: {
         "bg-dark": "#21262a",
         "bg-light": "#ffffff",
