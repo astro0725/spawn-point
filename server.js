@@ -2,7 +2,10 @@ const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const bodyParser = require("body-parser");
 const express = require("express");
+const exphbs = require('express-handlebars'); 
+const hbs = exphbs.create({ defaultLayout: 'main' });
 const admin = require("firebase-admin");
+// const ejs = require('ejs');
 
 const serviceAccount = require("./serviceAccountKey.json");
 
@@ -19,7 +22,10 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // use ejs as the view engine
-app.engine("html", require("ejs").renderFile);
+// app.engine("html", require("ejs").renderFile);
+// Configure Handlebars as the view engine
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 // serve the files out of ./public as our main files
 app.use(express.static("public"));
 
@@ -37,21 +43,24 @@ app.all("*", (req, res, next) => {
   res.cookie("XSRF-TOKEN", req.csrfToken());
   next();
 });
-// login route that renders the login page
-app.get("/login", (req, res) => {
-  res.render("login.html");
-});
-// signup route that renders the signup page
-app.get("/signup", (req, res) => {
-  res.render("signup.html");
-});
-// profile route that renders the profile page
-app.get("/profile", (req, res) => {
-  res.render("profile.html");
-});
+// // login route that renders the login page
+// app.get("/login", (req, res) => {
+//   res.render("login.html");
+// });
+// // signup route that renders the signup page
+// app.get("/signup", (req, res) => {
+//   res.render("signup.html");
+// });
+// // profile route that renders the profile page
+// app.get("/profile", (req, res) => {
+//   res.render("profile.html");
+// });
 // index route that renders the index.html page
-app.get("/", (req, res) => {
-  res.render("index.html");
+// app.get("/", (req, res) => {
+//   res.render("index.html");
+// });
+app.get('/', (req, res) => {
+  res.render('feed'); 
 });
 // start the server
 app.listen(PORT, () => {
