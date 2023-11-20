@@ -7,7 +7,8 @@ module.exports = {
         'press-start':['"Press Start 2P"']
       },
       colors: {
-        "bg-dark": "#21262a",
+        "dark": "#21262a",
+        "dark-purple": "#512a8e",
         "light-blue": "#a5dbff",
         purple: "#7d1399",
         "neon-pink": "#eb7dff",
