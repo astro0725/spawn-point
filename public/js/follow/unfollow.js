@@ -8,4 +8,44 @@ document.addEventListener("DOMContentLoaded", function () {
     messagingSenderId: "308630756272",
     appId: "1:308630756272:web:1f7f9e0703c0803b449475",
   };
+
+  // initialize firebase
+  firebaseConfig.initializeApp(firebaseConfig);
+
+  // function to unfollow user
+  async function unfollowUser(username) {
+    try {
+        // gets user from firebase auth
+        const user = firebase.auth(). currentUser;
+        // checks if user is signed in
+        if(!user){
+            throw new Error('User not signed in!');
+        }
+        // gets user following list
+        let following = user.displayName ? user.displayName.split(',') : [];
+        // checks if user is already following
+        if(!following.includes.(username)) {
+            console.log('You are not following this user!');
+            return;
+        }
+
+        // preps data for PUT request to update user profile
+        const response = await fetch('fetchRouteNeeded', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'route'
+            },
+            body: JSON.stringify({
+                //gets ID token for auth
+                idToken: await user.getIdToken(),
+                // updates displayName with new following list
+                displayName: following.join(','),
+                // ensure that a new id token is returned
+                returnSecureToken: true,
+            })
+        })
+    } catch (error) {
+    
+    }
+  }
 });

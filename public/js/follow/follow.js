@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // initiializes firebase
   firebaseConfig.initializeApp(firebaseConfig);
+
   // function to follow user
   async function followUser(username) {
     try {
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       // add username to list
       following.push(username);
+
       // preps data for PUT request to update user profile
       const response = await fetch("fetchRouteNeeded", {
         method: "POST",
