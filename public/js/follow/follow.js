@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch("fetchRouteNeeded", {
         method: "POST",
         headers: {
-          "Content-Type": "route",
+          "Content-Type": "apllication/json",
         },
         body: JSON.stringify({
           // gets ID token for auth
