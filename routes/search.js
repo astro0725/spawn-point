@@ -6,7 +6,7 @@ router.get('/search', async (req, res) => {
     try {
         const searchTerm = req.query.term;
         const results = await searchController.search(searchTerm);
-        res.json(results);
+        res.render('searchResults', { results });
     } catch (error) {
         res.status(500).send('Error performing search');
     }

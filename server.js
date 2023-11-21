@@ -75,10 +75,19 @@ app.get("/profile", async function (req, res) {
     res.redirect("/login");
   }
 });
-// index route that renders the index.html page
+// index route that renders the feed page
 app.get("/", async (req, res) => {
   try {
     res.render("feed");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+app.get("/search", async (req, res) => {
+  try {
+    res.render("search");
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
@@ -113,6 +122,17 @@ app.get("/sessionLogout", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Unable to logout");
+  }
+});
+
+app.get('/searchPopulate', async (req, res) => {
+  try {
+      const users = await fetchRandomUsers(5); 
+      const posts = await fetchRandomPosts(10); 
+
+      res.json({ users, posts });
+  } catch (error) {
+      res.status(500).send('Error fetching initial data');
   }
 });
 
