@@ -62,6 +62,10 @@ app.all("*", (req, res, next) => {
 app.get('/', (req, res) => {
   res.render('feed'); 
 });
+// partial registration
+hbs.handlebars.registerPartial('header', './views/partials/header.handlebars');
+hbs.handlebars.registerPartial('footer', './views/partials/sidebar.handlebars');
+hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
 // start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
