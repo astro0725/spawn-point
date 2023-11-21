@@ -43,17 +43,17 @@ document.addEventListener("DOMContentLoaded", function () {
           idToken: await user.getIdToken(),
           // updates displayName with new following list
           displayName: following.join(","),
-          // Ensure a new ID token is returned
+          // ensure a new ID token is returned
           returnSecureToken: true,
         }),
       });
 
-      // parse the respone JSON
+      // parse respone JSON
       const data = await response.json();
 
       // checks if request was successful
       if (!response.ok) {
-        throw new Error("Failed to update user profile: ${data.error.message}");
+        throw new Error(`Failed to update user profile: ${data.error.message}`);
       }
       console.log("User has been followed successfully!");
     } catch (error) {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // attaches event listener to follow button
   const followButton = document.getElementById("followButton");
   followButton.addEventListener("click", function () {
-    // prompts user to enter username that they want to follow
+    // gets username from the profile
     const userToFollow = document.getElementById("usename").innerText;
     // call followUser funct with username
     followUser(userToFollow);

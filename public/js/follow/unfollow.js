@@ -42,10 +42,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 displayName: following.join(','),
                 // ensure that a new id token is returned
                 returnSecureToken: true,
-            })
-        })
+            }),
+        }),
+
+        // parse response JSON
+        const data = await response.json();
+
+        // checks if request was successful
+        if(!response.ok) {
+            throw new Error(`Failed to update user profile: ${data.error.message}`);
+        }
+        console.log('User has been unfollowed successfully!');
     } catch (error) {
-    
+        // handles errors
+        console.error('Error unfollowing user:', error);
     }
   }
+
+  // attaches event listenter to unfollow button
+  const unfollowButton = document.getElementById('unfollowButton');
+  unfollowButton.addEventListener('click', function() {
+    // gets username from the profile
+    const userToUnfollow = document.getElementById('username').innerText;
+    // call unfollowUser funct with username
+    unfollowUser(userToUnfollow);
+  });
 });
