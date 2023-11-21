@@ -1,19 +1,21 @@
-
-<h1>Feed</h1>
-    {{#each posts}}
-        <div class="post">
-            <h2>{{this.title}}</h2>
-            <p>{{this.body}}</p>
-            {{#if this.imageUrl}}
-                <img src="{{this.imageUrl}}" alt="Post Image">
-            {{/if}}
-            {{#if this.videoUrl}}
-                <video controls>
-                    <source src="{{this.videoUrl}}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            {{/if}}
-        </div>
-    {{else}}
-        <p>No posts to display.</p>
-    {{/each}}
+<div class="mt-1 mb-1 fixed flex justify-center items-center w-5/6 h-screen filter drop-shadow-lg">
+    <div class="rounded-lg bg-black h-full w-4/6 overflow-y-scroll">
+        {{#each posts}}
+            <div class="post">
+                <h2>{{this.title}}</h2>
+                <p>{{this.body}}</p>
+                {{#if this.imageUrl}}
+                    <img src="{{this.imageUrl}}" alt="Post Image">
+                {{/if}}
+                {{#if this.videoUrl}}
+                    <video controls>
+                        <source src="{{this.videoUrl}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {{/if}}
+            </div>
+        {{else}}
+            <p class="text-center text-white">No posts to display.</p>
+        {{/each}}
+    </div>
+</div>

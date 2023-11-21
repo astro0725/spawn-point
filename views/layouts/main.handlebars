@@ -18,9 +18,13 @@
   {{> sidebar }}
   <!-- Render the post modal -->
   {{> createPost }}
+  <!-- Render the posts -->
+  {{> post}}
   <!-- Render the sub layout -->
   {{{ body }}}
 </body>
-<!-- Include the JavaScript file for handling post creation -->
+<!-- Include the JavaScript file for handling special functions -->
 <script src="/js/posts/createPost.js"></script>
+<script src="/js/posts/carousel.js"></script>
+<script src="/js/posts/deletePost.js"></script>
 </html>
