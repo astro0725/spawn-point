@@ -1,0 +1,14 @@
+<header class="flex flex-wrap justify-between items-center w-full bg-dark-purple px-8" id="header">
+    <div class="flex items-center">
+        <h1 class="text-pink font-press-start text-4xl">Pixel</h1>
+        <h1 class="text-white font-press-start text-4xl">Pals</h1>
+    </div>
+    <div class="flex flex-nowrap">
+        {{#if userIsAuthenticated}}
+            <button class="self-center px-8 py-3 rounded bg-white">Logout</button>
+        {{else}}
+            <button class="self-center px-8 py-3 rounded bg-white mr-2">Sign in</button>
+            <button class="self-center px-8 py-3 font-semibold rounded bg-neon-pink text-white">Sign up</button>
+        {{/if}}
+    </div>
+</header>
