@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // add username to list
       following.push(username);
       // preps data for PUTmrequest to update user profile
-      const response = await fetch({
+      const response = await fetch("link", {
         method: "POST",
         headers: {
           "Content-Type": "route",
@@ -64,10 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const followButton = document.getElementById("followButton");
   followButton.addEventListener("click", function () {
     // prompts user to enter username that they want to follow
-    const userToFollow = prompt("Enter the user you want to follow:");
-    if (userToFollow) {
-      // calls followUser with entered username
-      followUser(userToFollow);
-    }
+    const userToFollow = document.getElementById("usename").innerText;
+    // call followUser funct with username
+    followUser(userToFollow);
   });
 });
