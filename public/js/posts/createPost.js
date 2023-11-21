@@ -5,6 +5,18 @@ document.getElementById('postButton').addEventListener('click', function(event) 
     modal.classList.remove('hidden');
 });
 
+document.getElementById('closeCreate').addEventListener('click', function(event) {
+    event.preventDefault();
+    var modal = document.getElementById('createPostModal');
+    modal.classList.add('hidden');
+});
+
+document.getElementById('cancelPost').addEventListener('click', function(event) {
+    event.preventDefault();
+    var modal = document.getElementById('createPostModal');
+    modal.classList.add('hidden');
+});
+
 async function submitPost(event) {
     event.preventDefault(); 
         const user = await getCurrentUser(); 
