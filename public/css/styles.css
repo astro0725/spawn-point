@@ -820,6 +820,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-pink {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 167 187 / var(--tw-bg-opacity));
+}
+
 .bg-no-repeat {
   background-repeat: no-repeat;
 }
