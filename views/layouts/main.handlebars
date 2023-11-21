@@ -16,8 +16,11 @@
   {{> header }}
   <!-- Render the sidebar partial -->
   {{> sidebar }}
+  <!-- Render the post modal -->
+  {{> createPost }}
   <!-- Render the sub layout -->
   {{{ body }}}
 </body>
-
+<!-- Include the JavaScript file for handling post creation -->
+<script src="/public/js/posts/createPost.js"></script>
 </html>

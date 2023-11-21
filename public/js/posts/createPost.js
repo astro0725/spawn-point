@@ -1,4 +1,10 @@
 // function to handle the submission of a new post
+document.getElementById('postButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    var modal = document.getElementById('createPostModal');
+    modal.classList.remove('hidden');
+});
+
 async function submitPost(event) {
     event.preventDefault(); 
         const user = await getCurrentUser(); 
