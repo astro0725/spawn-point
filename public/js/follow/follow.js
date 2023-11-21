@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     projectId: "pixel-pals-fdb7e",
     storageBucket: "pixel-pals-fdb7e.appspot.com",
     messagingSenderId: "308630756272",
-    addId: "1:308630756272:web:1f7f9e0703c0803b449475",
+    appId: "1:308630756272:web:1f7f9e0703c0803b449475",
   };
 
   // initiializes firebase
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       // add username to list
       following.push(username);
-      // preps data for PUTmrequest to update user profile
-      const response = await fetch("link", {
+      // preps data for PUT request to update user profile
+      const response = await fetch("fetchRouteNeeded", {
         method: "POST",
         headers: {
           "Content-Type": "route",
