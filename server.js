@@ -78,7 +78,7 @@ app.get("/profile", async function (req, res) {
 // index route that renders the index.html page
 app.get("/", async (req, res) => {
   try {
-    res.render("index.html");
+    res.render("feed");
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");

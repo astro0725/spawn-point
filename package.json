@@ -9,6 +9,7 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon server.js && npm run build-tail",
+    "dev": "nodemon server.js && npm run build-tail",
     "build-tail": "npx tailwindcss build -i public/css/tailwind.css -o public/css/styles.css --watch flag"
   },
   "keywords": [

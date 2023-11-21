@@ -15,6 +15,11 @@ Follow.init(
       allowNull: false,
       references: { model: "Users", key: "fierbaseUserId" },
     },
+    firebaseUserId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   },
   {
     sequelize,
