@@ -66,6 +66,7 @@ app.get('/', (req, res) => {
 hbs.handlebars.registerPartial('header', './views/partials/header.handlebars');
 hbs.handlebars.registerPartial('footer', './views/partials/sidebar.handlebars');
 hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
+hbs.handlebars.registerPartial('search', './views/partials/search.handlebars');
 // start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
