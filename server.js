@@ -5,7 +5,6 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({ defaultLayout: "main" });
 const admin = require("firebase-admin");
-const ejs = require("ejs");
 
 const serviceAccount = require("./serviceAccountKey.json");
 
@@ -21,8 +20,6 @@ const csrfMiddleware = csrf({ cookie: true });
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// use ejs as the view engine
-app.engine("html", require("ejs").renderFile);
 // Configure Handlebars as the view engine
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
@@ -46,7 +43,7 @@ app.all("*", (req, res, next) => {
 // login route that renders the login page
 app.get("/login", async (req, res) => {
   try {
-    res.render("login.html");
+    res.render("loginPage");
   } catch (error) {
     console.error(error);
     res.status(500).send("Unable to login");
@@ -55,7 +52,7 @@ app.get("/login", async (req, res) => {
 // signup route that renders the signup page
 app.get("/signup", async (req, res) => {
   try {
-    res.render("signup.html");
+    res.render("signupPage");
   } catch (error) {
     console.error(error);
     res.status(500).send("Unable to load signup page");
@@ -70,7 +67,7 @@ app.get("/profile", async function (req, res) {
       .auth()
       .verifySessionCookie(sessionCookie, true /** checkRevoked */);
     console.log("Logged in:", userData.email);
-    res.render("profile.html");
+    res.render("profilePage");
   } catch (error) {
     res.redirect("/login");
   }

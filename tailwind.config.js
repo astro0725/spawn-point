@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./views/partials/*.handlebars', './views/*.handlebars'],
+  content: ["./views/partials/*.handlebars", "./views/*.handlebars"],
   theme: {
     extend: {
       fontFamily: {
-        'press-start':['"Press Start 2P"']
+        "press-start": ['"Press Start 2P"'],
       },
       colors: {
-        "dark": "#21262a",
+        dark: "#21262a",
         "dark-purple": "#512a8e",
         "light-blue": "#a5dbff",
         purple: "#7d1399",
@@ -15,9 +15,8 @@ module.exports = {
         pink: "#ffa7bb",
         yellow: "#ffe400",
         cream: "#fde8da",
-      }
+      },
     },
   },
-  plugins: [],
-}
-
+  plugins: [require("@tailwindcss/forms")],
+};
