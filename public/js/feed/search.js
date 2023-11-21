@@ -25,15 +25,6 @@ document.getElementById('searchSubmit').addEventListener('click', function(event
         .catch(error => console.error('Error:', error));
 });
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        var modal = document.getElementById('searchModal');
-        if (modal) {
-            modal.classList.add('hidden');
-        }
-    }
-});
-
 function renderResults(data) {
     return data.map(result => `<div>${result.name}</div>`).join('');
 }
