@@ -65,4 +65,4 @@ function getCurrentUser() {
     });
 }
 // add an event listener to the form submission
-document.getElementById('postForm').addEventListener('submit', submitPost);
+// document.getElementById('postForm').addEventListener('submit', submitPost);
