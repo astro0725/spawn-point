@@ -2,10 +2,10 @@ const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const bodyParser = require("body-parser");
 const express = require("express");
-const exphbs = require('express-handlebars'); 
-const hbs = exphbs.create({ defaultLayout: 'main' });
+const exphbs = require("express-handlebars");
+const hbs = exphbs.create({ defaultLayout: "main" });
 const admin = require("firebase-admin");
-// const ejs = require('ejs');
+const ejs = require("ejs");
 
 const serviceAccount = require("./serviceAccountKey.json");
 
@@ -22,10 +22,10 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // use ejs as the view engine
-// app.engine("html", require("ejs").renderFile);
+app.engine("html", require("ejs").renderFile);
 // Configure Handlebars as the view engine
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 // serve the files out of ./public as our main files
 app.use(express.static("public"));
 
@@ -43,29 +43,87 @@ app.all("*", (req, res, next) => {
   res.cookie("XSRF-TOKEN", req.csrfToken());
   next();
 });
-// // login route that renders the login page
-// app.get("/login", (req, res) => {
-//   res.render("login.html");
-// });
-// // signup route that renders the signup page
-// app.get("/signup", (req, res) => {
-//   res.render("signup.html");
-// });
-// // profile route that renders the profile page
-// app.get("/profile", (req, res) => {
-//   res.render("profile.html");
-// });
-// index route that renders the index.html page
-// app.get("/", (req, res) => {
-//   res.render("index.html");
-// });
-app.get('/', (req, res) => {
-  res.render('feed'); 
+// login route that renders the login page
+app.get("/login", async (req, res) => {
+  try {
+    res.render("login.html");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Unable to login");
+  }
 });
+// signup route that renders the signup page
+app.get("/signup", async (req, res) => {
+  try {
+    res.render("signup.html");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Unable to load signup page");
+  }
+});
+// profile route that renders the profile page
+app.get("/profile", async function (req, res) {
+  try {
+    const sessionCookie = req.cookies.session || "";
+
+    const userData = await admin
+      .auth()
+      .verifySessionCookie(sessionCookie, true /** checkRevoked */);
+    console.log("Logged in:", userData.email);
+    res.render("profile.html");
+  } catch (error) {
+    res.redirect("/login");
+  }
+});
+// index route that renders the index.html page
+app.get("/", async (req, res) => {
+  try {
+    res.render("index.html");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+// route that creates new user session cookies
+app.post("/sessionLogin", async (req, res) => {
+  try {
+    const idToken = req.body.idToken.toString();
+    // Set session expiration to 5 days.
+    const expiresIn = 60 * 60 * 24 * 5 * 1000;
+    // create the session cookie
+    // uses the Firebase Admin SDK to verify the ID token and decode its claims
+    const sessionCookie = await admin
+      .auth()
+      .createSessionCookie(idToken, { expiresIn });
+    // set cookie policy for session cookie
+    // cookie expires after 5 days and is only in the backend
+    const options = { maxAge: expiresIn, httpOnly: true };
+    res.cookie("session", sessionCookie, options);
+    res.end(JSON.stringify({ status: "success" }));
+  } catch (error) {
+    res.status(401).send("UNAUTHORIZED REQUEST!");
+  }
+});
+
+app.get("/sessionLogout", async (req, res) => {
+  try {
+    res.clearCookie("session");
+    res.redirect("/login");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Unable to logout");
+  }
+});
+
 // partial registration
-hbs.handlebars.registerPartial('header', './views/partials/header.handlebars');
-hbs.handlebars.registerPartial('footer', './views/partials/sidebar.handlebars');
-hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
+hbs.handlebars.registerPartial("header", "./views/partials/header.handlebars");
+hbs.handlebars.registerPartial("footer", "./views/partials/sidebar.handlebars");
+hbs.handlebars.registerPartial(
+  "createPost",
+  "./views/partials/createPost.handlebars"
+);
+
 // start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
