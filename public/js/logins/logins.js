@@ -20,6 +20,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   // Get the login form element
   const loginForm = document.getElementById("login");
 
+  console.log("logged in");
+
   // Define an async function to handle the form submission
   const handleLogin = async (event) => {
     event.preventDefault();
