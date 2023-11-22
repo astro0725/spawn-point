@@ -1,6 +1,5 @@
 const firebase = require('firebase/app');
 const auth = require('firebase/auth');
-const helmet = require('helmet');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -32,21 +31,12 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 // use the cookie parser middleware to parse cookies
 app.use(cookieParser());
-// use the helmet middleware to secure the app by setting various HTTP headers
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-    imgSrc: ["'self'", 'data:'],
-  }
-}));
 // use routes to serve window locations
 const routes = require("./routes/index");
 app.use('/', routes)
 // partial registration
 hbs.handlebars.registerPartial('header', './views/partials/header.handlebars');
-hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
-hbs.handlebars.registerPartial('search', './views/partials/search.handlebars');
+hbs.handlebars.registerPartial('sidebar', './views/partials/sidebar.handlebars');
 // start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

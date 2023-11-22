@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const { signInUser } = require('../controllers/userAuth');
 
+// GET request to render the signin page
+router.get('/', (req, res) => {
+    try {
+        res.render('signin');
+    } catch (error) {
+        console.error("Signin Error:", error);
+    }
+});
+
+// POST request to handle the form submission
 router.post('/signin', async (req, res) => {
     try {
         await signInUser(req.body.email, req.body.password);

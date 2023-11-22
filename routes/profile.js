@@ -9,7 +9,7 @@ router.get('/profile', async (req, res) => {
         .auth()
         .verifySessionCookie(sessionCookie, true);
         console.log("Logged in:", userData.email);
-        res.render("profilePage");
+        res.render("profile");
     } catch (error) {
         res.redirect("/signup");
     }
