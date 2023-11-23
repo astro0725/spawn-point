@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 // POST request to handle the form submission
 router.post('/', async (req, res) => {
     try {
-        await signUpUser(req.body.email, req.body.password);
+        await signUpUser(req.body.email, req.body.password, req.body.username);
         res.status(200).json({ message: 'Signup successful' });
     } catch (error) {
         console.error("Signup Error:", error);

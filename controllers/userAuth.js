@@ -1,17 +1,19 @@
-const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
+const User = require("../models/user");
 
 // initialize firebase authentication
 const auth = getAuth();
 
 // function to sign up a new user with email and password
-async function signUpUser(email, password) {
+async function signUpUser(email, password, username) {
     try {
         // attempts to create a new user with provided email and password
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         // extract the user information from the user credentials
-        const user = userCredential.user;
+        const firebaseUser = userCredential.user;
+        await User.create({ username, firebaseUserId: firebaseUser.uid });
         // log the user info
-        console.log(user);
+        console.log("User created in Firebase and database:", firebaseUser);
     } catch (error) {
         // logs the error using firebase error codes and messages
         const errorCode = error.code;
