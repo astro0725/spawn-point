@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('Something went wrong');
+                    throw new Error(`error`);
                 }
             })
             .then(data => {

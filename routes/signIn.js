@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 // POST request to handle the form submission
-router.post('/signin', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         await signInUser(req.body.email, req.body.password);
         res.status(200).send('User signed in successfully');

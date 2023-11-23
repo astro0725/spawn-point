@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { signOutUser } = require('../controllers/userAuth');
 
-router.post('/signout', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         await signOutUser();
         res.status(200).send('User signed out successfully');
