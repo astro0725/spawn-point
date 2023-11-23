@@ -1,5 +1,6 @@
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
-const User = require("../models/user");
+const db = require("../models");
+const User = db.User;
 
 // initialize firebase authentication
 const auth = getAuth();
