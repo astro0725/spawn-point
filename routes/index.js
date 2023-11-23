@@ -8,9 +8,9 @@ const signOutRoutes = require('./signOut');
 const profileRoutes = require('./profile');
 
 // Use the imported routes
-router.use('/signIn', signInRoutes);
-router.use('/signUp', signUpRoutes);
-router.use('/signOut', signOutRoutes);
+router.use('/signin', signInRoutes);
+router.use('/signup', signUpRoutes);
+router.use('/signout', signOutRoutes);
 router.use('/profile', profileRoutes);
 
 module.exports = router;

@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         await signUpUser(req.body.email, req.body.password);
-        res.redirect('/profile');
+        res.status(200).json({ message: 'Signup successful' });
     } catch (error) {
         console.error("Signup Error:", error);
         res.status(400).send(error.message);
