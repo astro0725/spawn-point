@@ -158,41 +158,6 @@ body {
  }
 }
 
-.follow-me {
- text-decoration: none;
- font-size: 14px;
- display: flex;
- align-items: center;
- margin-top: auto;
- overflow: hidden;
- color: #9c9cab;
- padding: 0 20px;
- height: 52px;
- flex-shrink: 0;
- border-top: 1px solid $border-color;
- position: relative;
- svg {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
- }
-}
-
-.follow-text {
- display: flex;
- align-items: center;
- transition: 0.3s;
-}
-
-.follow-me:hover {
- .follow-text {
-  transform: translateY(100%);
- }
- .developer {
-  top: 0;
- }
-}
-
 .developer {
  position: absolute;
  color: #fff;
@@ -332,31 +297,6 @@ body {
  font-family: $title-font;
 }
 
-.timeline {
- display: flex;
- padding-top: 20px;
- position: relative;
- z-index: 2;
- &-left {
-  width: 310px;
-  flex-shrink: 0;
- }
- &-right {
-  flex-grow: 1;
-  padding-left: 20px;
- }
- @media screen and (max-width: 768px) {
-  flex-wrap: wrap;
-  flex-direction: column-reverse;
-  &-right {
-   padding-left: 0;
-   margin-bottom: 20px;
-  }
-  &-left {
-   width: 100%;
-  }
- }
-}
 
 .box {
  background-color: $bg-color;
@@ -907,25 +847,4 @@ body {
  .profile-menu-link:nth-last-child(2) {
   display: none;
  }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.01);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.11);
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
