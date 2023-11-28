@@ -1,4 +1,5 @@
 const firebase = require('firebase/app');
+const  getAnalytics = require("firebase/analytics");
 const auth = require('firebase/auth');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -11,17 +12,18 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 // initialize firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCiZF1VwaJ8d18jp6nJtC2AQnboz1AerYg",
-  authDomain: "pixel-pals-fdb7e.firebaseapp.com",
-  databaseURL: "https://pixel-pals-fdb7e-default-rtdb.firebaseio.com",
-  projectId: "pixel-pals-fdb7e",
-  storageBucket: "pixel-pals-fdb7e.appspot.com",
-  messagingSenderId: "308630756272",
-  appId: "1:308630756272:web:1f7f9e0703c0803b449475",
-  measurementId: "G-X42F0TX02X"
+  apiKey: "AIzaSyDGkVjngegwg6kZi9L4lgWcko6gh04VEHY",
+  authDomain: "spawnpoint-d6d36.firebaseapp.com",
+  projectId: "spawnpoint-d6d36",
+  storageBucket: "spawnpoint-d6d36.appspot.com",
+  messagingSenderId: "262097616343",
+  appId: "1:262097616343:web:ead2c6f79613b498991f92",
+  measurementId: "G-MG5JNJ31R4"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+// TODO: read docs on firebase analytics
+const analytics = getAnalytics(firebase);
 // Configure Handlebars as the view engine
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
