@@ -1,8 +1,8 @@
 -- Creates database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS pixelpals_development;
+CREATE DATABASE IF NOT EXISTS spawnpoint_development;
 
 -- Select the newly created database
-USE pixelpals_development;
+USE spawnpoint_development;
 
 CREATE TABLE IF NOT EXISTS Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS Users (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- CREATE DATABASE IF NOT EXISTS pixelpals_development;
+-- CREATE DATABASE IF NOT EXISTS spawnpoint_development;
 
--- USE pixelpals_test;
+-- USE spawnpoint_test;
