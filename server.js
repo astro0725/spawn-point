@@ -33,7 +33,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 // use the cookie parser middleware to parse cookies
 app.use(cookieParser());
-// use routes to serve window locations
+// use routes to serve window locations (ref is called here so that its called after the initialization of firebase)
 const routes = require("./routes/index");
 app.use('/', routes)
 // partial registration
