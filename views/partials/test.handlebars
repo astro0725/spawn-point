@@ -1,28 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700|Source+Sans+Pro:300,400,600,700&display=swap");
-
-$bg-color: #151728;
-$border-color: #272a3a;
-$title-font: "DM Sans", sans-serif;
-$body-font: "Source Sans Pro", sans-serif;
-$side-title: #5c5e6e;
-$button: #8f98a9;
-
-* {
- outline: none;
- box-sizing: border-box;
-}
-
-html {
- box-sizing: border-box;
- -webkit-font-smoothing: antialiased;
-}
-
-body {
- font-family: $body-font;
- background-color: #373e57;
- color: #ccc8db;
-}
-
 .container {
  background-color: $bg-color;
  display: flex;
@@ -215,30 +190,17 @@ body {
  margin-right: 10px;
 }
 
-.search-bar {
- height: 60px;
- background-color: $bg-color;
- z-index: 3;
- position: relative;
- input {
-  height: 100%;
-  width: 100%;
-  display: block;
-  background-color: transparent;
-  border: none;
-  padding: 0 54px;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3e%3cpath d='M508.9 478.7L360 330a201.6 201.6 0 0045.2-127.3C405.3 90.9 314.4 0 202.7 0S0 91 0 202.7s91 202.6 202.7 202.6c48.2 0 92.4-17 127.3-45.2L478.7 509c4.2 4.1 11 4.1 15 0l15.2-15.1c4.1-4.2 4.1-11 0-15zm-306.2-116c-88.3 0-160-71.8-160-160s71.7-160 160-160 160 71.7 160 160-71.8 160-160 160z' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%235C5D71'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: 25px 50%;
-  color: #fff;
-  font-family: $body-font;
-  font-weight: 600;
-  &::placeholder {
-   color: #5c5d71;
+  .search-input {
+    background-image: url("data:image/svg+xml;charset=UTF-8, ...");
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 25px 50%;
+    font-family: 'Source Sans Pro', sans-serif; /* Replace with your $body-font */
   }
- }
-}
+
+  .search-input::placeholder {
+    color: #5c5d71;
+  }
 
 .main-container {
  padding: 20px;
@@ -907,25 +869,4 @@ body {
  .profile-menu-link:nth-last-child(2) {
   display: none;
  }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.01);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.11);
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
