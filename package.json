@@ -21,6 +21,7 @@
   "author": "Angelica Strong",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cli": "^1.0.1",
