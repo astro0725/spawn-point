@@ -8,9 +8,21 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true
         },
+        gameId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        displayOrder: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
     }, {
         sequelize,
         modelName: 'Showcase',
+        timestamps: true,
     });
-    return S;
+    Showcase.associate = models => {
+        Showcase.belongsTo(models.User, { through: 'UserShowcase' });
+    };
+    return Showcase;
 };

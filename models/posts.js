@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     class Post extends sequelize.Sequelize.Model {}
     Post.init({
-        firebaseUserId: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -19,5 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'Post'
     });
+    Post.associate = models => {
+        Post.belongsTo(models.User, { 
+            foreignKey: 'firebaseUserId', 
+            as: 'user' 
+        });
+    };
     return Post;
 };
