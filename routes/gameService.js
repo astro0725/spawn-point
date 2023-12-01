@@ -4,7 +4,6 @@ const gameService = require('../controllers/gameService');
 
 router.get('/showcase', gameService.topGames);
 router.get('/showcase', gameService.searchGames);
-
-// TODO: add other game-related routes
+router.post('/showcase', gameService.addGames);
 
 module.exports = router;

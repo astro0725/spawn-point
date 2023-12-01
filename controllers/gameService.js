@@ -18,7 +18,6 @@ async function topGames(req, res) {
     }
 };
 
-// TODO: Add other methods adding games to user profile
 async function searchGames(req, res) {
     try {
         const searchQuery = req.query.search; 
