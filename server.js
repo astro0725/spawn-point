@@ -37,8 +37,15 @@ app.use(cookieParser());
 const routes = require("./routes/index");
 app.use('/', routes)
 // partial registration
-hbs.handlebars.registerPartial('header', './views/partials/header.handlebars');
-hbs.handlebars.registerPartial('sidebar', './views/partials/sidebar.handlebars');
+hbs.handlebars.registerPartial('leftSidebar', './views/partials/sidebars/leftMenu.handlebars');
+hbs.handlebars.registerPartial('rightSidebar', './views/partials/sidebars/rightMenu.handlebars');
+hbs.handlebars.registerPartial('showcase', './views/partials/profile/gameShowcase.handlebars');
+hbs.handlebars.registerPartial('links', './views/partials/profile/links.handlebars');
+hbs.handlebars.registerPartial('profileHeader', './views/partials/profile/profileHeader.handlebars');
+hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
+hbs.handlebars.registerPartial('post', './views/partials/post.handlebars');
+hbs.handlebars.registerPartial('searchbar', './views/partials/searchbar.handlebars');
+
 // start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
