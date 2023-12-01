@@ -8,6 +8,12 @@ const auth = getAuth();
 // function to sign up a new user with email and password
 async function signUpUser(email, password, username) {
     try {
+        // checks if a username already exists in the database
+        const existingUser = await User.findOne({ where: { username: username } });
+        if (existingUser) {
+            console.error("Username already taken.");
+            return { error: "Username already taken." };
+        }
         // attempts to create a new user with provided email and password
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         // extract the user information from the user credentials
