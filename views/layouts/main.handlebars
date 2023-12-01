@@ -10,18 +10,22 @@
 </head>
 
 <body>
-  <!-- Render the header partial -->
-  {{> header }}
-  <!-- Render the sidebar partial -->
-  {{> sidebar }}
-  <!-- Render the modal partials -->
-  <!-- Render the sub layout -->
-  {{{ body }}}
+<!-- This is the main container -->
+<div class="flex max-w-[1600px] h-screen overflow-hidden mx-auto">
+  <!-- Render left menu -->
+  {{> leftMenu }}
+  <!-- This is the content container -->
+  <div class="flex-grow flex flex-col bg-[#181d2f]">
+    <!-- Render search bar -->
+    {{> searchbar }}
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </div>
+  <!-- Render the right menu -->
+  {{> rightMenu }}
+</div>
 </body>
 <!-- Include the JavaScript file for handling special functions -->
-<script src="/js/header/signin.js"></script>
-<script src="/js/header/signup.js"></script>
-<script src="/js/header/signout.js"></script>
 <script src="/js/userAuth/signup.js"></script>
 <script src="/js/userAuth/signin.js"></script>
 </html>
