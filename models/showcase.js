@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true,
     });
     Showcase.associate = models => {
-        Showcase.belongsTo(models.User, { through: 'UserShowcase' });
+        Showcase.belongsTo(models.User, { 
+            foreignKey: 'firebaseUserId',
+            as: 'user'
+        });
     };
+    
     return Showcase;
 };

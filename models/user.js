@@ -34,10 +34,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true,
     });
     User.associate = models => {
-        User.belongsToMany(models.Showcase, { through: 'UserShowcase' });
-    };
-    User.associate = models => {
-        User.belongsToMany(models.Posts, { through: 'UserPosts' });
+        User.hasMany(models.Posts, { through: 'UserPosts' });
+        User.hasOne(models.Showcase, { through: 'UserShowcase' });
     };
     return User;
 };
