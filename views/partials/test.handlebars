@@ -33,46 +33,31 @@ body {
 }
 
 .left-side {
- width: 260px;
- border-right: 1px solid $border-color;
- display: flex;
- flex-direction: column;
- transition: 0.3s;
- background-color: $bg-color;
- overflow: auto;
- flex-shrink: 0;
- @media screen and (max-width: 930px) {
-  &.active {
-   z-index: 4;
-   & > *:not(.logo) {
+  width: 260px;
+  border-right: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+  background-color: $bg-color;
+  overflow: auto;
+  flex-shrink: 0;
+  z-index: 4;
+
+  & > *:not(.logo) {
     opacity: 1;
     transition: 0.3s 0.2s;
-   }
-   .left-side-button svg:first-child {
-    opacity: 0;
-   }
-   .left-side-button svg:last-child {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-   }
   }
-  &:not(.active) {
-   width: 56px;
-   overflow: hidden;
-   & > *:not(.logo):not(.left-side-button) {
-    opacity: 0;
-   }
-   .logo {
+
+  .logo {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
     transform-origin: bottom;
     display: flex;
     align-items: center;
     margin-top: -10px;
-   }
   }
- }
 }
+
 
 .right-side {
  width: 280px;
