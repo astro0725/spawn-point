@@ -1,6 +1,7 @@
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
 const db = require("../models");
 const User = db.User;
+const validatePassword = require("../utils/validatePassword");
 
 // initialize firebase authentication
 const auth = getAuth();
@@ -8,6 +9,12 @@ const auth = getAuth();
 // function to sign up a new user with email and password
 async function signUpUser(email, password, username) {
     try {
+        // checks password strength
+        const passwordError = validatePassword(password);
+        if (passwordError) {
+            console.error(passwordError);
+            return { error: passwordError };
+        }
         // checks if a username already exists in the database
         const existingUser = await User.findOne({ where: { username: username } });
         if (existingUser) {
