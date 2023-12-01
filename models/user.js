@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.associate = models => {
         User.hasMany(models.Posts, { through: 'UserPosts' });
-        User.hasOne(models.Showcase, { through: 'UserShowcase' });
+        User.hasOne(models.Showcase);
     };
     return User;
 };
