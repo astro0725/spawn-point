@@ -10,6 +10,9 @@ module.exports = {
         '260': '260px',
         '280': '280px',
       },
+      height: {
+        '60': '60px',
+      },
       fontFamily: {
         "press-start": ['"Press Start 2P"'],
         "dm-sans": ['"DM Sans"', 'sans-serif'],
