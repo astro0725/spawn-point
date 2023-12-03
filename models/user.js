@@ -34,7 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true,
     });
     User.associate = models => {
-        User.hasMany(models.Posts, { through: 'UserPosts' });
+        User.hasMany(models.Posts, {
+            foreignKey: 'firebaseUserId',
+            as: 'posts'
+        });
         User.hasOne(models.Showcase);
     };
     return User;

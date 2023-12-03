@@ -22,8 +22,8 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// TODO: read docs on firebase analytics
-const analytics = getAnalytics(firebase);
+// // TODO: read docs on firebase analytics
+// const analytics = getAnalytics(firebase);
 // Configure Handlebars as the view engine
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");

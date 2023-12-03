@@ -8,6 +8,7 @@ module.exports = {
       },
       width: {
         '260': '260px',
+        '280': '280px',
       },
       fontFamily: {
         "press-start": ['"Press Start 2P"'],

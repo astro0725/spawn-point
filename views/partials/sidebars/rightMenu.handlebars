@@ -1,21 +1,19 @@
-<div class="right-side">
-  <div class="account">
-    <button class="account-button">
-      <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <path d="M22 6l-10 7L2 6" />
-      </svg>
-    </button>
-    <button class="account-button">
-      <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
-      </svg>
-    </button>
-    <span class="account-user">Quan Ha
-      <img src="https://images.genius.com/2326b69829d58232a2521f09333da1b3.1000x1000x1.jpg" alt="" class="account-profile" alt="">
-      <span>▼</span>
-    </span>
-  </div>
+<div class="flex flex-col flex-shrink-0 ml-auto overflow-auto bg-side transition duration-300 z-10 lg:static lg:translate-x-0 w-280">
+  {{#if user}}
+    <div class="account">
+      <span class="account-user">{{user.name}}
+        <img src="{{user.profilePicture}}" alt="profile picture" class="account-profile">
+        <span>▼</span>
+      </span>
+    </div>
+  {{else}}
+    <!-- If the user is not authenticated -->
+    <div class="account">
+      <button class="account-button">
+        Create An Account
+      </button>
+    </div>
+  {{/if}}
   <div class="side-wrapper stories">
     <div class="side-title">STORIES</div>
     <div class="user">
