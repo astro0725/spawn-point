@@ -84,7 +84,42 @@ async function editPost(req, res) {
     }
 };
 
+async function deletePost(req, res) {
+    try {
+        const postId = req.params.postId;
+        const firebaseUserId = req.firebaseUserId;
+
+        // Find the post to be deleted
+        const post = await Posts.findByPk(postId);
+        if (!post) {
+            return res.status(404).send({
+                message: "Post not found."
+            });
+        }
+
+        // Check if the user making the request is the creator of the post
+        if (post.firebaseUserId !== firebaseUserId) {
+            return res.status(403).send({
+                message: "Unauthorized to delete this post."
+            });
+        }
+
+        // Delete the post
+        await post.destroy();
+
+        res.send({
+            message: "Post deleted successfully."
+        });
+    } catch (error) {
+        console.error("Error deleting post:", error);
+        res.status(500).send({
+            message: "Some error occurred while deleting the post."
+        });
+    }
+};
+
 module.exports = {
     createPost,
     editPost, 
+    deletePost
 };

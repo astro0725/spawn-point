@@ -5,5 +5,6 @@ const postsController = require('../controllers/posts.js');
 
 router.post('/', firebaseAuth, postsController.createPost);
 router.put('/:postId', firebaseAuth, postsController.editPost);
+router.delete('/:postId', firebaseAuth, postsController.deletePost);
 
 module.exports = router;
