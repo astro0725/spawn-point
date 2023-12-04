@@ -41,6 +41,50 @@ async function createPost(req, res) {
     }
 };
 
+async function editPost(req, res) {
+    try {
+        const postId = req.params.postId; 
+        const { content } = req.body; 
+        const firebaseUserId = req.firebaseUserId; 
+
+        if (!content) {
+            return res.status(400).send({
+                message: "Content cannot be empty."
+            });
+        }
+
+        // Find the post to be edited
+        const post = await Posts.findByPk(postId);
+        if (!post) {
+            return res.status(404).send({
+                message: "Post not found."
+            });
+        }
+
+        // Check if the user making the request is the creator of the post
+        if (post.firebaseUserId !== firebaseUserId) {
+            return res.status(403).send({
+                message: "Unauthorized to edit this post."
+            });
+        }
+
+        // Update the post
+        post.content = content;
+        await post.save();
+
+        res.send({
+            message: "Post updated successfully.",
+            post: post
+        });
+    } catch (error) {
+        console.error("Error updating post:", error);
+        res.status(500).send({
+            message: "Some error occurred while updating the post."
+        });
+    }
+};
+
 module.exports = {
     createPost,
+    editPost, 
 };
