@@ -70,7 +70,35 @@ async function unfollowUser(req, res) {
     }
 };
 
+async function getFriends(req, res) {
+    try {
+        const firebaseUserId = req.user.firebaseUserId;
+
+        // Find the internal ID for the user
+        const user = await User.findOne({ where: { firebaseUserId } });
+        if (!user) {
+            return res.status(404).send("User not found.");
+        }
+
+        // Find all users that the current user is following
+        const following = await user.getFollowing();
+
+        // Find all users that are following the current user
+        const followers = await user.getFollowers();
+
+        // Determine mutual friends (users who are both in following and followers)
+        const friends = following.filter(followedUser => 
+            followers.some(follower => follower.id === followedUser.id));
+
+        res.json(friends);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
 module.exports = {
     followUser,
     unfollowUser,
+    getFriends
 }

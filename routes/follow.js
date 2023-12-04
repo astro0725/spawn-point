@@ -4,5 +4,6 @@ const followController = require('../controllers/follow');
 
 router.post('/follow/:firebaseUserId', followController.followUser);
 router.delete('/follow/:firebaseUserId', followController.unfollowUser);
+router.get('/friends', followController.getFriends);
 
 module.exports = router;
