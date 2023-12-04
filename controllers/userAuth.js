@@ -1,4 +1,4 @@
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword } = require("firebase/auth");
 const db = require("../models");
 const User = db.User;
 const validatePassword = require("../lib/passwordValidator");
@@ -63,8 +63,32 @@ async function signOutUser() {
     }
 }
 
+async function changeEmail(req, res) {
+    try {
+        const user = getAuth().currentUser;
+        const newEmail = req.body.newEmail;
+
+        if (!newEmail) {
+            return res.status(400).send({
+                message: "New email cannot be empty."
+            });
+        }
+
+        await updateEmail(user, newEmail);
+        res.send({
+            message: "Email updated successfully."
+        });
+    } catch (error) {
+        console.error("Error updating email:", error);
+        res.status(500).send({
+            message: "Some error occurred while updating the email."
+        });
+    }
+}
+
 module.exports = {
     signUpUser,
     signInUser,
-    signOutUser
+    signOutUser,
+    changeEmail
 };
