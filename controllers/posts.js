@@ -23,9 +23,8 @@ async function createPost(req, res) {
 
         const newPost = {
             firebaseUserId: firebaseUserId,
-            username: user.username, // Use the username from the User model
+            username: user.username,
             content: content
-            // createdAt is automatically handled by Sequelize
         };
 
         const post = await Posts.create(newPost);
@@ -41,7 +40,6 @@ async function createPost(req, res) {
         });
     }
 };
-
 
 module.exports = {
     createPost,
