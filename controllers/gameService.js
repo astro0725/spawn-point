@@ -1,6 +1,7 @@
 const axios = require('axios');
-const { Showcase } = require('../models/showcase.js');
-const { User } = require('../models/user.js');
+const db = require("../models");
+const User = db.User;
+const Showcase = db.Showcase;
 
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
 
