@@ -51,6 +51,8 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'followerId',
             otherKey: 'followingId'
         });
+        User.hasMany(models.BlockedUser, { foreignKey: 'blockerId' });
+        User.hasMany(models.BlockedUser, { foreignKey: 'blockedId' });
     };
     return User;
 };
