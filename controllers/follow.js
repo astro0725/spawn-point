@@ -1,5 +1,6 @@
 const db = require('../models');
 const User = db.User;
+const Follow = db.Follow;
 
 async function followUser(req,res) {
     try {
@@ -20,7 +21,7 @@ async function followUser(req,res) {
         }
 
         // Check if already following
-        const existingFollow = await UserFollowers.findOne({
+        const existingFollow = await Follow.findOne({
             where: { followerId: follower.id, followingId: following.id }
         });
 
@@ -29,7 +30,7 @@ async function followUser(req,res) {
         }
 
         // Create the follow relationship
-        await UserFollowers.create({ followerId: follower.id, followingId: following.id });
+        await Follow.create({ followerId: follower.id, followingId: following.id });
         res.send('Followed successfully');
     } catch (error) {
         res.status(500).send(error.message);
