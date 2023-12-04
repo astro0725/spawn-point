@@ -80,15 +80,21 @@ async function followBack(req, res) {
             return res.status(404).send("User not found.");
         }
 
-        // Find all users that the current user is following
-        const following = await user.getFollowing();
-
-        // Find all users that are following the current user
-        const followers = await user.getFollowers();
-
-        // Determine mutual friends (users who are both in following and followers)
-        const mutuals = following.filter(followedUser => 
-            followers.some(follower => follower.id === followedUser.id));
+        // Find mutual connections directly using a database query
+        const mutuals = await User.findAll({
+            include: [{
+                model: User,
+                as: 'Followers',
+                where: { firebaseUserId: { [db.Sequelize.Op.ne]: firebaseUserId } },
+                include: [{
+                    model: User,
+                    as: 'Following',
+                    where: { id: user.id },
+                    through: { attributes: [] }
+                }],
+                through: { attributes: [] }
+            }]
+        });
 
         res.json(mutuals);
     } catch (error) {
