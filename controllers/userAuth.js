@@ -86,9 +86,39 @@ async function changeEmail(req, res) {
     }
 }
 
+async function changePassword(req, res) {
+    try {
+        const user = getAuth().currentUser;
+        const newPassword = req.body.newPassword;
+
+        const passwordError = validatePassword(newPassword);
+        if (passwordError) {
+            console.error(passwordError);
+            return res.status(400).send({ error: passwordError });
+        }
+
+        if (!newPassword) {
+            return res.status(400).send({
+                message: "New password cannot be empty."
+            });
+        }
+
+        await updatePassword(user, newPassword);
+        res.send({
+            message: "Password updated successfully."
+        });
+    } catch (error) {
+        console.error("Error updating password:", error);
+        res.status(500).send({
+            message: "Some error occurred while updating the password."
+        });
+    }
+}
+
 module.exports = {
     signUpUser,
     signInUser,
     signOutUser,
-    changeEmail
+    changeEmail,
+    changePassword
 };
