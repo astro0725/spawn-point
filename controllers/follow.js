@@ -70,7 +70,7 @@ async function unfollowUser(req, res) {
     }
 };
 
-async function getFriends(req, res) {
+async function followBack(req, res) {
     try {
         const firebaseUserId = req.user.firebaseUserId;
 
@@ -87,10 +87,10 @@ async function getFriends(req, res) {
         const followers = await user.getFollowers();
 
         // Determine mutual friends (users who are both in following and followers)
-        const friends = following.filter(followedUser => 
+        const mutuals = following.filter(followedUser => 
             followers.some(follower => follower.id === followedUser.id));
 
-        res.json(friends);
+        res.json(mutuals);
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -100,5 +100,5 @@ async function getFriends(req, res) {
 module.exports = {
     followUser,
     unfollowUser,
-    getFriends
+    followBack
 }
