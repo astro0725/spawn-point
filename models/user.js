@@ -41,13 +41,15 @@ module.exports = (sequelize, DataTypes) => {
         User.hasOne(models.Showcase);
         User.belongsToMany(models.User, { 
             as: 'Followers', 
-            through: 'UserFollowers',
-            foreignKey: 'followingId'
+            through: 'Follow',
+            foreignKey: 'followingId',
+            otherKey: 'followerId'
         });
         User.belongsToMany(models.User, { 
             as: 'Following', 
-            through: 'UserFollowers',
-            foreignKey: 'followerId'
+            through: 'Follow',
+            foreignKey: 'followerId',
+            otherKey: 'followingId'
         });
     };
     return User;
