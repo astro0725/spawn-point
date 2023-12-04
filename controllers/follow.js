@@ -21,7 +21,7 @@ async function followUser(req,res) {
 
         // Check if already following
         const existingFollow = await UserFollowers.findOne({
-            where: { followerId, followingId }
+            where: { followerId: follower.id, followingId: following.id }
         });
 
         if (existingFollow) {
