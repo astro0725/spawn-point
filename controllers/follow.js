@@ -37,6 +37,40 @@ async function followUser(req,res) {
     }
 };
 
+async function unfollowUser(req, res) {
+    try {
+        const followerFirebaseId = req.user.firebaseUserId;
+        const followingFirebaseId = req.params.firebaseUserId;
+
+        // Find the internal IDs for both users 
+        const follower = await User.findOne({ where: { firebaseUserId: followerFirebaseId } });
+        const following = await User.findOne({ where: { firebaseUserId: followingFirebaseId } });
+
+        if (!follower || !following) {
+            return res.status(404).send("User not found.");
+        }
+
+        // Check if the follow relationship exists
+        const existingFollow = await Follow.findOne({
+            where: { followerId: follower.id, followingId: following.id }
+        });
+
+        if (!existingFollow) {
+            return res.status(400).send("Follow relationship does not exist.");
+        }
+
+        // Remove the follow relationship
+        await Follow.destroy({
+            where: { followerId: follower.id, followingId: following.id }
+        });
+
+        res.send('Unfollowed successfully');
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
 module.exports = {
     followUser,
+    unfollowUser,
 }
