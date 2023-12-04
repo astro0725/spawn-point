@@ -1,4 +1,6 @@
-const { Post } = require('../models/post.js');
+const db = require("../models");
+const User = db.User;
+const Posts = db.Posts;
 
 async function createPost(req, res) {
     try {
@@ -11,13 +13,22 @@ async function createPost(req, res) {
             });
         }
 
+        // Find the user to get the username
+        const user = await User.findOne({ where: { firebaseUserId } });
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found."
+            });
+        }
+
         const newPost = {
             firebaseUserId: firebaseUserId,
-            content: content,
-            createdAt: new Date()
+            username: user.username, // Use the username from the User model
+            content: content
+            // createdAt is automatically handled by Sequelize
         };
 
-        const post = await Post.create(newPost);
+        const post = await Posts.create(newPost);
 
         res.status(201).send({
             message: "Post created successfully.",
@@ -30,6 +41,7 @@ async function createPost(req, res) {
         });
     }
 };
+
 
 module.exports = {
     createPost,

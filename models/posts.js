@@ -10,14 +10,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        createdAt: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        }
     }, {
         sequelize,
-        modelName: 'Posts'
+        modelName: 'Posts',
+        timestamps: true
     });
     Posts.associate = models => {
         Posts.belongsTo(models.User, { 
