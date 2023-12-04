@@ -3,6 +3,9 @@ module.exports = {
   content: ["./views/partials/*.handlebars", "./views/*.handlebars"],
   theme: {
     extend: {
+      margin: {
+        '4.5': '18px',
+      },
       spacing: {
         '7.5': '30px',
       },
@@ -30,6 +33,10 @@ module.exports = {
         pink: "#ffa7bb",
         yellow: "#ffe400",
         cream: "#fde8da",
+        online: '#7fd222',
+        offline: '#606a8d',
+        idle: '#dd1c20',
+        accountUser: '#64674a',
       },
     },
   },

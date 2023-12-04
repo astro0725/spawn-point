@@ -1,9 +1,10 @@
 <div class="flex flex-col flex-shrink-0 ml-auto overflow-auto bg-side transition duration-300 z-10 lg:static lg:translate-x-0 w-280">
   {{#if user}}
     <div class="flex justify-evenly items-center sticky top-0 bg-dark z-10 flex-shrink-0 h-60">
-      <span class="account-user">{{user.name}}
-        <img src="{{user.profilePicture}}" alt="profile picture" class="account-profile">
-        <span>▼</span>
+      <span class="inline-flex items-center text-accountUser font-semibold">
+        {{user.name}}
+        <img src="{{user.profilePicture}}" alt="profile picture" class="rounded-full w-7 h-7 mx-2.5 my-0">
+        <span class="text-xs font-normal">▼</span> 
       </span>
     </div>
   {{else}}
@@ -42,19 +43,20 @@
       </div>
     </div>
   </div> --}}
-  <div class="side-wrapper contacts">
-  <div class="side-title">FRIENDS</div>
-    {{#each users as |user|}}
-      <div class="user">
-        <img src="{{user.imageUrl}}" class="user-img">
-        <div class="username">{{user.name}}
-          <div class="user-status {{#if user.isOffline}}offline{{/if}}{{#if user.isIdle}}idle{{/if}}"></div>
+  <div class="p-7.5 flex flex-1 items-center">
+  <div class="font-dm-sans text-side text-sm font-semibold mb-5">FRIENDS</div>
+    {{#each users as |user index|}}
+      <div class="flex items-center cursor-pointer {{unless @first 'mt-4.5'}}">
+        <img src="{{user.imageUrl}}" class="rounded-full w-11 h-11 mr-4 object-cover object-center">
+        <div class="text-sm font-dm-sans">{{user.name}}
+          <div class="h-2 w-2 user-status rounded-full ml-auto {{#if user.isOffline}}bg-offline{{else if user.isIdle}}bg-idle{{else}}bg-online{{/if}}"></div>
         </div>
       </div>
     {{/each}}
   </div>
 
-  {{!-- <div class="search-bar right-search">
+  {{!-- TODO: Maybe a searchbar to search for friends? 
+  <div class="search-bar right-search">
     <input type="text" placeholder="Search" />
     <div class="search-bar-svgs">
       <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
