@@ -39,6 +39,16 @@ module.exports = (sequelize, DataTypes) => {
             as: 'posts'
         });
         User.hasOne(models.Showcase);
+        User.belongsToMany(models.User, { 
+            as: 'Followers', 
+            through: 'UserFollowers',
+            foreignKey: 'followingId'
+        });
+        User.belongsToMany(models.User, { 
+            as: 'Following', 
+            through: 'UserFollowers',
+            foreignKey: 'followerId'
+        });
     };
     return User;
 };
