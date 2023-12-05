@@ -4,11 +4,10 @@ const db = require('../models');
 const User = db.User;
 const Connections = db.Connections;
 
-const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
-const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
-const REDIRECT_URI = 'localhost:';
-
 // TODO: twitch sucks rn - come back later
+// const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
+// const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
+// const REDIRECT_URI = 'localhost:';
 // const twitch = {
 //     authorize: (req, res) => {
 //         const scope = 'user:read:email';
