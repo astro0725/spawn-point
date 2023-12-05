@@ -66,21 +66,25 @@ async function signOutUser() {
 
 async function changeEmail(req, res) {
     try {
+        // get the currently authenticated firebase user
         const user = getAuth().currentUser;
         const newEmail = req.body.newEmail;
 
+        // validate that the new email is provided
         if (!newEmail) {
             return res.status(400).send({
                 message: "New email cannot be empty."
             });
         }
 
+        // ensures that the new email is not the same as the current email
         if (user.email === newEmail) {
             return res.status(400).send({
                 message: "New email cannot be the same as the current email."
             });
         }
 
+        // updates the user email in firebase authentication
         await updateEmail(user, newEmail);
         res.send({
             message: "Email updated successfully."
@@ -95,30 +99,38 @@ async function changeEmail(req, res) {
 
 async function changePassword(req, res) {
     try {
+        // get the currently authenticated firebase user
         const user = getAuth().currentUser;
         const newPassword = req.body.newPassword;
 
+        // validate password strength
         const passwordError = validatePassword(newPassword);
         if (passwordError) {
             console.error(passwordError);
             return res.status(400).send({ error: passwordError });
         }
 
+        // ensures a password is provided
         if (!newPassword) {
             return res.status(400).send({
                 message: "New password cannot be empty."
             });
         }
 
+        // retrieves user data from database
         const dbUser = await User.findOne({ where: { firebaseUserId: user.uid } });
+        
+        // checks if the new password is different from the current one
         if (bcrypt.compareSync(newPassword, dbUser.previousPasswordHash)) {
             return res.status(400).send({
                 message: "New password cannot be the same as the previous password."
             });
         }
 
+        // updates the user password in firebase authentication
         await updatePassword(user, newPassword);
 
+        // update the stored hash of the previous password in the database
         dbUser.previousPasswordHash = bcrypt.hashSync(newPassword, 10);
         await dbUser.save();
 
