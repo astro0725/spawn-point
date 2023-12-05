@@ -1,4 +1,5 @@
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword } = require("firebase/auth");
+const bcrypt = require('bcrypt');
 const db = require("../models");
 const User = db.User;
 const validatePassword = require("../lib/passwordValidator");
