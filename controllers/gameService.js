@@ -41,15 +41,15 @@ async function searchGames(req, res) {
 }
 
 async function addGames(req, res) {
-    const userId = req.params.userId;
-        const { gameIds } = req.body;
+    const firebaseUserId = req.firebaseUserId;
+    const { gameIds } = req.body;
 
-        if (!gameIds || gameIds.length > 5) {
+    if (!gameIds || gameIds.length === 0 || gameIds.length > 5) {
         return res.status(400).send({ message: "You can add up to 5 games only." });
-        }
+    }
 
-        try {
-        const user = await User.findByPk(userId);
+    try {
+        const user = await User.findOne({ where: { firebaseUserId } });
         if (!user) {
             return res.status(404).send({ message: "User not found." });
         }
@@ -61,11 +61,11 @@ async function addGames(req, res) {
         await user.setGames(games); 
 
         res.status(200).send({ message: "Games added to profile successfully." });
-        } catch (error) {
+    } catch (error) {
         console.error('Error adding games to profile:', error);
         res.status(500).send('Error adding games to profile');
-        }
     }
+}
 
 module.exports = {
     topGames,
