@@ -31,7 +31,7 @@ app.use('/', routes)
 hbs.handlebars.registerPartial('leftSidebar', './views/partials/sidebars/leftMenu.handlebars');
 hbs.handlebars.registerPartial('rightSidebar', './views/partials/sidebars/rightMenu.handlebars');
 hbs.handlebars.registerPartial('showcase', './views/partials/profile/gameShowcase.handlebars');
-hbs.handlebars.registerPartial('links', './views/partials/profile/links.handlebars');
+hbs.handlebars.registerPartial('connections', './views/partials/profile/connections.handlebars');
 hbs.handlebars.registerPartial('profileHeader', './views/partials/profile/profileHeader.handlebars');
 hbs.handlebars.registerPartial('createPost', './views/partials/createPost.handlebars');
 hbs.handlebars.registerPartial('post', './views/partials/post.handlebars');
