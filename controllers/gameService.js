@@ -2,6 +2,7 @@ const axios = require('axios');
 const db = require("../models");
 const User = db.User;
 const Showcase = db.Showcase;
+const RAWGGame = db.RAWGGame;
 
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
 
@@ -42,7 +43,7 @@ async function searchGames(req, res) {
 
 async function addGames(req, res) {
     const firebaseUserId = req.firebaseUserId;
-    const { gameIds } = req.body;
+    const { gameIds } = req.body; 
 
     if (!gameIds || gameIds.length === 0 || gameIds.length > 5) {
         return res.status(400).send({ message: "You can add up to 5 games only." });
@@ -54,21 +55,31 @@ async function addGames(req, res) {
             return res.status(404).send({ message: "User not found." });
         }
 
-        const games = await Showcase.findAll({
-            where: { id: gameIds }
-        });
+        const games = await Promise.all(gameIds.map(async (gameId) => {
+            let game = await RAWGGame.findOne({ where: { id: gameId } });
+            if (!game) {
+                const response = await axios.get(`${RAWG_API_URL}/${gameId}`);
+                game = await RAWGGame.create({
+                    id: gameId,
+                    title: response.data.name,
+                    backgroundImageUrl: response.data.background_image
+                });
+            }
+            return game;
+        }));
 
-        await user.setGames(games); 
+        const showcase = await Showcase.findOne({ where: { userId: user.id } });
+        await showcase.setRAWGGames(games);
 
-        res.status(200).send({ message: "Games added to profile successfully." });
+        res.status(200).send({ message: "Games added to showcase successfully." });
     } catch (error) {
-        console.error('Error adding games to profile:', error);
-        res.status(500).send('Error adding games to profile');
+        console.error('Error adding games to showcase:', error);
+        res.status(500).send('Error adding games to showcase');
     }
 }
 
 module.exports = {
     topGames,
     searchGames,
-    addGames,
+    addGames
 };

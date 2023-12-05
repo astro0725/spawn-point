@@ -1,6 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
     const RAWGGame = sequelize.define('RAWGGame', {
-        title: DataTypes.STRING,
+        gameId: {
+            type: DataTypes.INTEGER, // possibly might use strings as opposed to integers
+            primaryKey: true,
+            allowNull: false
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         backgroundImageUrl: {
             type: DataTypes.STRING,
             allowNull: true  
