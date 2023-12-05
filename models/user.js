@@ -57,6 +57,10 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.hasMany(models.BlockedUser, { foreignKey: 'blockerId' });
         User.hasMany(models.BlockedUser, { foreignKey: 'blockedId' });
+        User.hasMany(models.Connections, {
+            foreignKey: 'firebaseUserId',
+            as: 'connections'
+        });
     };
     return User;
 };
