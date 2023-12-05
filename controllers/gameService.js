@@ -1,9 +1,11 @@
+require('dotenv').config();
 const axios = require('axios');
 const db = require("../models");
 const User = db.User;
 const Showcase = db.Showcase;
 const RAWGGame = db.RAWGGame;
 
+const RAWG_API_KEY = process.env.RAWG_API_KEY;
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
 
 async function topGames(req, res) {
