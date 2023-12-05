@@ -78,8 +78,47 @@ async function addGames(req, res) {
     }
 }
 
+async function updateGames(req, res) {
+    const firebaseUserId = req.firebaseUserId;
+    const { gameIds } = req.body;
+
+    if (!gameIds) {
+        return res.status(400).send({ message: "Game IDs are required for updating." });
+    }
+
+    try {
+        const user = await User.findOne({ where: { firebaseUserId } });
+        if (!user) {
+            return res.status(404).send({ message: "User not found." });
+        }
+
+        const gamesToUpdate = await Promise.all(gameIds.map(async (gameId) => {
+            let game = await RAWGGame.findOne({ where: { id: gameId } });
+            if (!game) {
+                const response = await axios.get(`${RAWG_API_URL}/${gameId}`);
+                game = await RAWGGame.create({
+                    id: gameId,
+                    title: response.data.name,
+                    backgroundImageUrl: response.data.background_image
+                });
+            }
+            return game;
+        }));
+
+        let showcase = await Showcase.findOne({ where: { userId: user.id } });
+
+        await showcase.setRAWGGames(gamesToUpdate);
+
+        res.status(200).send({ message: "Showcase updated successfully." });
+    } catch (error) {
+        console.error('Error updating showcase:', error);
+        res.status(500).send('Error updating showcase');
+    }
+}
+
 module.exports = {
     topGames,
     searchGames,
-    addGames
+    addGames,
+    updateGames,
 };

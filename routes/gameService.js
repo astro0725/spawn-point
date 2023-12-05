@@ -5,6 +5,8 @@ const firebaseAuth = require('../utils/firebaseAuth');
 
 router.get('/', firebaseAuth, gameService.topGames);
 router.get('/', firebaseAuth, gameService.searchGames);
-router.post('/', firebaseAuth, gameService.addGames);
+router.post('/addGames', firebaseAuth, gameService.addGames);
+router.put('/update', firebaseAuth, gameServiceController.updateGames);
+
 
 module.exports = router;
