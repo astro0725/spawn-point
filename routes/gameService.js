@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const gameService = require('../controllers/gameService');
+const firebaseAuth = require('../utils/firebaseAuth');
 
-router.get('/', gameService.topGames);
-router.get('/', gameService.searchGames);
-router.post('/', gameService.addGames);
+router.get('/', firebaseAuth, gameService.topGames);
+router.get('/', firebaseAuth, gameService.searchGames);
+router.post('/', firebaseAuth, gameService.addGames);
 
 module.exports = router;
