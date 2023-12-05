@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
     const Connections = sequelize.define('Connections', {
-        // TODO: twitch sucks for now
-        // twitchUserId: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // },
-        // twitchAccessToken: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // },
         // todo: setup other platforms
+        firebaseUserId: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        steamId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     });
 
     Connections.associate = models => {
