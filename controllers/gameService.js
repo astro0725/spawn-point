@@ -105,7 +105,7 @@ async function updateGames(req, res) {
             return game;
         }));
 
-        let showcase = await Showcase.findOne({ where: { firebaseUserId } });
+        const showcase = await Showcase.findOne({ where: { firebaseUserId } });
 
         await showcase.setRAWGGames(gamesToUpdate);
 
