@@ -1,13 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
     const Connections = sequelize.define('Connections', {
-        twitchUserId: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        twitchAccessToken: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
+        // TODO: twitch sucks for now
+        // twitchUserId: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // twitchAccessToken: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
         // todo: setup other platforms
     });
 
