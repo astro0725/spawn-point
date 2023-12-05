@@ -68,7 +68,7 @@ async function addGames(req, res) {
             return game;
         }));
 
-        const showcase = await Showcase.findOne({ where: { userId: user.id } });
+        const showcase = await Showcase.findOne({ where: { firebaseUserId } });
         await showcase.setRAWGGames(games);
 
         res.status(200).send({ message: "Games added to showcase successfully." });
@@ -105,7 +105,7 @@ async function updateGames(req, res) {
             return game;
         }));
 
-        let showcase = await Showcase.findOne({ where: { userId: user.id } });
+        let showcase = await Showcase.findOne({ where: { firebaseUserId } });
 
         await showcase.setRAWGGames(gamesToUpdate);
 
