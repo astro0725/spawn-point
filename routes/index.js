@@ -11,6 +11,7 @@ const gameServiceRoutes = require('./gameService');
 const followRoutes = require('./follow');
 const blockRoutes = require('./block');
 const postRoutes = require('./posts');
+const feedRoutes = require('./feed');
 
 // Use the imported routes
 router.use('/signin', signInRoutes);
@@ -22,5 +23,6 @@ router.use('/follow', followRoutes);
 router.use('/block', blockRoutes);
 router.use('/posts', postRoutes);
 router.use('/account', accountRoutes);
+router.use('/', feedRoutes);
 
 module.exports = router;
