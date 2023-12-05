@@ -35,27 +35,22 @@ async function steamCallback(req, res) {
             res.status(500).send('Authentication failed: ' + error);
         } else {
             const steamId = result.claimedIdentifier.split('/').pop();
-            const firebaseUserId = req.firebaseUserId; // Assuming this is set in your middleware
+            const firebaseUserId = req.firebaseUserId;
 
             try {
-                // Find the user based on firebaseUserId
                 const user = await User.findOne({ where: { firebaseUserId } });
                 if (!user) {
                     return res.status(404).send({ message: "User not found." });
                 }
 
-                // Find or create a connection for the user
                 let connection = await Connections.findOne({ where: { firebaseUserId } });
                 if (connection) {
-                    // Update existing connection with new steamId
                     connection.steamId = steamId;
                     await connection.save();
                 } else {
-                    // Create a new connection with steamId
                     await Connections.create({ firebaseUserId, steamId });
                 }
 
-                // Construct the Steam profile URL
                 const steamProfileUrl = `https://steamcommunity.com/profiles/${steamId}`;
 
                 res.send({
