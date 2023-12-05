@@ -1,4 +1,4 @@
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword, sendPasswordResetEmail } = require("firebase/auth");
 const bcrypt = require('bcrypt');
 const db = require("../models");
 const User = db.User;
@@ -145,10 +145,33 @@ async function changePassword(req, res) {
     }
 }
 
+async function sendPasswordReset(req, res) {
+    try {
+        const email = req.body.email; 
+
+        if (!email) {
+            return res.status(400).send({
+                message: "Email address is required."
+            });
+        }
+
+        await sendPasswordResetEmail(auth, email);
+        res.send({
+            message: "Password reset email sent successfully."
+        });
+    } catch (error) {
+        console.error("Error sending password reset email:", error);
+        res.status(500).send({
+            message: "Some error occurred while sending the password reset email."
+        });
+    }
+}
+
 module.exports = {
     signUpUser,
     signInUser,
     signOutUser,
     changeEmail,
-    changePassword
+    changePassword,
+    sendPasswordReset,
 };
