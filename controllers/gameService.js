@@ -11,6 +11,7 @@ const RAWG_API_URL = 'https://api.rawg.io/api/games';
 async function topGames(req, res) {
     try {
         const response = await axios.get(`${RAWG_API_URL}`, { params: { 
+            key: RAWG_API_KEY,
             ordering: '-rating',
             dates: '2023-01-01,2023-12-31',
             page_size: 10, 
@@ -31,6 +32,7 @@ async function searchGames(req, res) {
 
         const response = await axios.get(`${RAWG_API_URL}`, { 
             params: { 
+                key: RAWG_API_KEY,
                 search: searchQuery,
                 page_size: 10,
             } 
@@ -45,7 +47,7 @@ async function searchGames(req, res) {
 
 async function addGames(req, res) {
     const firebaseUserId = req.firebaseUserId;
-    const { gameIds } = req.body; 
+    const { gameIds } = req.body;
 
     if (!gameIds || gameIds.length === 0 || gameIds.length > 5) {
         return res.status(400).send({ message: "You can add up to 5 games only." });
@@ -60,7 +62,9 @@ async function addGames(req, res) {
         const games = await Promise.all(gameIds.map(async (gameId) => {
             let game = await RAWGGame.findOne({ where: { id: gameId } });
             if (!game) {
-                const response = await axios.get(`${RAWG_API_URL}/${gameId}`);
+                const response = await axios.get(`${RAWG_API_URL}/${gameId}`, {
+                    params: { key: RAWG_API_KEY }
+                });
                 game = await RAWGGame.create({
                     id: gameId,
                     title: response.data.name,
@@ -97,7 +101,9 @@ async function updateGames(req, res) {
         const gamesToUpdate = await Promise.all(gameIds.map(async (gameId) => {
             let game = await RAWGGame.findOne({ where: { id: gameId } });
             if (!game) {
-                const response = await axios.get(`${RAWG_API_URL}/${gameId}`);
+                const response = await axios.get(`${RAWG_API_URL}/${gameId}`, {
+                    params: { key: RAWG_API_KEY }
+                });
                 game = await RAWGGame.create({
                     id: gameId,
                     title: response.data.name,
@@ -117,6 +123,7 @@ async function updateGames(req, res) {
         res.status(500).send('Error updating showcase');
     }
 }
+
 
 module.exports = {
     topGames,
