@@ -74,6 +74,12 @@ async function changeEmail(req, res) {
             });
         }
 
+        if (user.email === newEmail) {
+            return res.status(400).send({
+                message: "New email cannot be the same as the current email."
+            });
+        }
+
         await updateEmail(user, newEmail);
         res.send({
             message: "Email updated successfully."
@@ -103,7 +109,18 @@ async function changePassword(req, res) {
             });
         }
 
+        const dbUser = await User.findOne({ where: { firebaseUserId: user.uid } });
+        if (bcrypt.compareSync(newPassword, dbUser.previousPasswordHash)) {
+            return res.status(400).send({
+                message: "New password cannot be the same as the previous password."
+            });
+        }
+
         await updatePassword(user, newPassword);
+
+        dbUser.previousPasswordHash = bcrypt.hashSync(newPassword, 10);
+        await dbUser.save();
+
         res.send({
             message: "Password updated successfully."
         });
