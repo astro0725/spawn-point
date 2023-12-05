@@ -5,12 +5,12 @@ const router = express.Router();
 const signInRoutes = require('./signIn');
 const signUpRoutes = require('./signUp');
 const signOutRoutes = require('./signOut');
+const accountUpdateRoutes = require('./accountUpdate');
 const profileRoutes = require('./profile');
 const gameServiceRoutes = require('./gameService');
 const followRoutes = require('./follow');
 const blockRoutes = require('./block');
 const postRoutes = require('./posts');
-
 
 // Use the imported routes
 router.use('/signin', signInRoutes);
@@ -21,5 +21,6 @@ router.use('/showcase', gameServiceRoutes)
 router.use('/follow', followRoutes);
 router.use('/block', blockRoutes);
 router.use('/posts', postRoutes);
+router.use('/account', accountRoutes);
 
 module.exports = router;
