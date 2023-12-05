@@ -55,7 +55,13 @@ async function steamCallback(req, res) {
                     await Connections.create({ firebaseUserId, steamId });
                 }
 
-                res.send('Successfully authenticated with Steam');
+                // Construct the Steam profile URL
+                const steamProfileUrl = `https://steamcommunity.com/profiles/${steamId}`;
+
+                res.send({
+                    message: 'Successfully authenticated with Steam',
+                    steamProfileUrl: steamProfileUrl
+                });
             } catch (error) {
                 console.error('Error saving Steam ID:', error);
                 res.status(500).send('Error saving Steam ID');
