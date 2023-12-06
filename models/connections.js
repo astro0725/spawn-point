@@ -10,6 +10,26 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        playstationId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        riotId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        xboxId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        battleNetId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        epicGamesId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     });
 
     Connections.associate = models => {

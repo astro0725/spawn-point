@@ -37,7 +37,6 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.3",
     "passport": "^0.7.0",
-    "passport-steam": "^1.0.18",
     "sequelize": "^6.35.1",
     "serve": "^14.2.1"
   },
