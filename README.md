@@ -19,7 +19,7 @@ Cross-Platform Integration: Accessible for users across various gaming platforms
 Note: Only signup, login, and logout functionality is operational in the current build.
 
 ## Technology Stack
-PixelPals is built using modern web development technologies:
+Spawn Point is built using modern web development technologies:
 
 Node.js: Backend JavaScript runtime environment.
 Express.js: Web framework for building the API.
