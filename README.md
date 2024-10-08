@@ -1,5 +1,5 @@
 # Spawn Point
-Spawn Point is a social hub tailored for gamers, offering a platform to showcase your gaming profile, highlights, and connect with like-minded players. Whether you're a casual gamer or a hardcore enthusiast, PixelPals provides the community and tools you need to celebrate your gaming moments.
+Spawn Point is a social hub tailored for gamers, offering a platform to showcase your gaming profile, highlights, and connect with like-minded players. Whether you're a casual gamer or a hardcore enthusiast, Spawn Point provides the community and tools you need to celebrate your gaming moments.
 
 ## Disclaimer
 This project was part of a school assignment and is currently **unfinished** and **no longer being developed**. The only fully functional features at this time are signup, login, and logout. Other features mentioned below were planned but not completed.
