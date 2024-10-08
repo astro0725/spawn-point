@@ -49,8 +49,3 @@ Access the application on your local server at http://localhost:3000.
 ## License
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) <br/>
 This project is licensed under the MIT license. For more details, see [this link](https://opensource.org/licenses/MIT).
-Future Development
-Improved Community Interaction: Add more features to enhance user-to-app and community interaction.
-API Integrations: Enable users to link gaming-related stats and profiles from external platforms.
-User-Created Content: Add user-driven features like group creation, news, and companion guides.
-Mobile Support: Develop a mobile app to allow posting from mobile devices.
